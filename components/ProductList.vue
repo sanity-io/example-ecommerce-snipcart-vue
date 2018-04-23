@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="switchView">
+    <div class="switchView" v-if="products.length > 0">
       <button
         @click="setView('list')"
         :class="displayView === 'list' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
@@ -41,7 +41,7 @@
         </button>
       </li>
     </ul>
-    <p v-else>
+    <p v-else class="no-products">
       No products to show
     </p>
   </div>
@@ -192,6 +192,12 @@
     display: block;
     margin: 0;
     padding: 0;
+  }
+
+  .no-products {
+    text-align: center;
+    font-size: 1.5em;
+    padding: 1em;
   }
 
 

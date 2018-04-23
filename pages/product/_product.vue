@@ -1,31 +1,31 @@
 <template>
-  <section class="container">
+  <section class="container" :key="product._id">
     <div class="sidebar">
-      <ImageViewer :images="defaultProductVariant.images" class="image-viewer" />
-      <router-link :to="'/vendor/' + vendor.slug.current" class="vendor">
-        <SanityImage :image="vendor.logo" class="vendorLogo" />
-        <div>{{vendor.title}}</div>
+      <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
+      <router-link :to="'/vendor/' + product.vendor.slug.current" class="vendor">
+        <SanityImage :image="product.vendor.logo" class="vendorLogo" />
+        <div>{{product.vendor.title}}</div>
       </router-link>
     </div>
 
     <div>
-      <h1 class="title">{{title}}</h1>
+      <h1 class="title">{{product.title}}</h1>
       <ul class="categories">
-        <li v-for="category in categories" v-if="category" v-bind:key="category._id">
+        <li v-for="category in product.categories" v-if="product.category" v-bind:key="category._id">
           <router-link :to="'/category/' + category.slug.current">
             {{category.title}}
           </router-link>
         </li>
       </ul>
-      <p v-if="blurb" class="blurb">{{blurb}}</p>
+      <p v-if="product.blurb" class="blurb">{{product.blurb}}</p>
       <div class="sub-head">
-        <div class="price">$ {{defaultProductVariant.price}}</div>
+        <div class="price">$ {{product.defaultProductVariant.price}}</div>
         <button
           type="button"
           class="snipcart-add-item"
-          :data-item-name="title"
-          :data-item-price="defaultProductVariant.price"
-          :data-item-id="defaultProductVariant._id"
+          :data-item-name="product.title"
+          :data-item-price="product.defaultProductVariant.price"
+          :data-item-id="product._id"
           data-item-url="http://localhost:3000"
         >
           Add to cart
@@ -55,7 +55,7 @@ const query = `
 export default {
   asyncData (context) {
     return sanity.fetch(query, context.route.params).then(data => {
-      return localize(data)
+      return {product: localize(data)}
     }, error => {
       console.error('Error', error)
       return false
@@ -69,11 +69,11 @@ export default {
   },
   computed: {
     bodyHtml: function() {
-      if (!this.body) {
+      if (!this.product || !this.product.body) {
         return 'No body to show'
       }
       return blocksToHtml({
-        blocks: this.body,
+        blocks: this.product.body,
         dataset: sanity.clientConfig.dataset,
         projectId: sanity.clientConfig.projectId
       })
