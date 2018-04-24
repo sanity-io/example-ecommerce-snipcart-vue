@@ -20,7 +20,7 @@ You're about five minutes away from running this example with your own data. You
 
 - If you don't have it, install the Sanity CLI with `npm install -g @sanity/cli`
 - Initialize a new project with `sanity init` and select the e-commerce schema
-- `sanity start` will start your studio and let you start editing
+- `sanity start` will start your studio and let you start adding your products!
 - Go to `sanity.json` and locate your `projectId` and `dataset`
 
 Head back to this project and in `sanity.js` change the `projectId` and `dataset` values to the ones you found above
