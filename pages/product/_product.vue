@@ -26,7 +26,7 @@
           :data-item-name="product.title"
           :data-item-price="product.defaultProductVariant.price"
           :data-item-id="product._id"
-          data-item-url="http://localhost:3000"
+          data-item-url="/"
         >
           Add to cart
         </button>
