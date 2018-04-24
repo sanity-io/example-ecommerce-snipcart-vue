@@ -52,7 +52,7 @@
       <nuxt/>  
     </section>
 
-    <div class="footer">A Sanity E-commerce example frontend in vuejs/nuxt</div>
+    <div class="footer">A Sanity E-commerce example frontend in vue.js / nuxt.js</div>
   </div>
 </template>
 
@@ -97,7 +97,7 @@ export default {
 
   section.content {
     grid-area: content;
-    padding: 1rem;
+    padding: 0rem 1rem 1rem 0rem;
   }
 
   .snipcart-checkout {
@@ -160,8 +160,9 @@ export default {
   }
 
   ul.categories {
+    font-weight: 500;
     display: none;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
     padding: 1rem;
   }
 
@@ -173,7 +174,7 @@ export default {
 
   .category {
     display: block;
-    margin: 0;
+    margin: 0 0 0.10rem 0;
     padding: 0;
   }
 

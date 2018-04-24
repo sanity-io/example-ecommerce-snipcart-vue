@@ -48,7 +48,7 @@
 
   .item {
     display: block;
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
   }
 
   .image {

@@ -18,7 +18,7 @@ h2.subtitle {
   font-size: 2em;
   color: #526488;
   word-spacing: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 40px;
 }
 
 @media only screen and (min-width: 500px)  {
