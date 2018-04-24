@@ -1,5 +1,11 @@
 module.exports = {
   /*
+  ** Snipcart
+  */
+  snipcart: {
+    apiKey: 'ODRkNmJhZDktOTk5YS00Y2Y1LTk5Y2ItMTkzNTlkZTYxNzhmNjM2NTk1NTI2OTgyMTc1MTUy'
+  },
+  /*
   ** Headers of the page
   */
   head: {
@@ -10,7 +16,27 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Sanity frontend example for E-commerce in Vue.js' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      // Snipcart styling
+      {
+        href: 'https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css',
+        type : 'text/css',
+        rel: 'stylesheet'
+      }
+    ],
+    script: [
+      // jQuery. Only needed for snipcart
+      {
+        src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js'
+      },
+      // Snipcart js
+      {
+        src: 'https://cdn.snipcart.com/scripts/2.0/snipcart.js',
+        id: 'snipcart',
+        'data-autopop': 'false',
+        // Change me. Read more at http://snipcart.com
+        'data-api-key': 'ODRkNmJhZDktOTk5YS00Y2Y1LTk5Y2ItMTkzNTlkZTYxNzhmNjM2NTk1NTI2OTgyMTc1MTUy'
+      }
     ]
   },
   /*
