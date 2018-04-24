@@ -70,7 +70,7 @@ export default {
   computed: {
     bodyHtml: function() {
       if (!this.product || !this.product.body) {
-        return 'No body to show'
+        return '…'
       }
       return blocksToHtml({
         blocks: this.product.body,
