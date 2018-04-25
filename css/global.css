@@ -31,12 +31,23 @@ a {
   color: #35495e;
 }
 
+a:active {
+  color: #3987d9;
+}
+
 button {
   border: none;
   display: inline-block;
   appearance: none;
-  color: #fff;
-  background-color: #000;
+  color: #000;
+  background-color: #fff;
   padding: 0.25em 0.5em;
   margin: 0 0.25em;
+  border: 2px solid #000;
+  outline: none;
+}
+
+button:active {
+  background-color: #000;
+  color: #fff;
 }

@@ -11,9 +11,10 @@
           <li><router-link :to="'/vendor'">Vendors</router-link></li>
         </ul>
       </nav>
-      <div class="cart">
+      <div class="cart" ref="cart">
         <a href="#" class="snipcart-checkout">
           <div class="snipcart-summary">
+            🛒
             <span class="snipcart-total-items"></span> items
             <span class="snipcart-total-price"></span>
           </div>
@@ -63,6 +64,17 @@ import AppLogo from '~/components/AppLogo.vue'
 export default {
   components: {
     AppLogo
+  },
+  mounted() {
+    if (!window) {
+      return
+    } else if (window.Snipcart) {
+      const cart = this.$refs.cart
+      window.Snipcart.subscribe('item.adding', function (ev, item, items) {
+        cart.classList.add('pop')
+        setTimeout(function() {cart.classList.remove('pop')}, 220)
+      })
+    }
   }
 }
 </script>
@@ -73,7 +85,7 @@ export default {
     .root {
       display: grid;
       grid-gap: 1em;
-      grid-template-columns: 15em auto;
+      grid-template-columns: 10em auto;
       grid-template-rows: 5em minmax(calc(100vh - 12rem), auto) 5em;
       grid-template-areas:
         "header   header"
@@ -97,7 +109,13 @@ export default {
 
   section.content {
     grid-area: content;
-    padding: 0rem 1rem 1rem 0rem;
+    padding: 1rem;
+  }
+
+  @media only screen and (min-width: 500px)  {
+    section.content {
+      padding: 0rem 1rem 1rem 0rem;
+    } 
   }
 
   .snipcart-checkout {
@@ -153,6 +171,13 @@ export default {
   .cart {
     padding: 0.5em;
     margin-left: auto;
+    transition: all 0.2s linear;
+    transform: scale(1);
+  }
+
+  .cart.pop {
+    color: #3cae21;
+    transform: scale(2);
   }
 
   nav :global(li) {
@@ -181,8 +206,6 @@ export default {
   .category .nuxt-link-active {
     font-weight: 700;
   }
-
-  
 
   ul.categories :global(a) {
     color: inherit;

@@ -28,7 +28,7 @@
           <p v-if="displayView === 'grid'" class="blurb">{{product.blurb}}</p>
         </router-link>
 
-        <span class="price">$ {{product.defaultProductVariant.price}}</span>
+        <span class="price">{{getFormattedPrice(product.defaultProductVariant.price)}}</span>
 
         <!-- Easy integration with snipcart. See readme for more info -->
         <button type="button" class="snipcart-add-item"
@@ -51,7 +51,7 @@
 <script>
   import SanityImage from '~/components/SanityImage'
   import lineClamp from 'vue-line-clamp'
-
+  import numeral from 'numeral'
 
   export default {
     data(context) {
@@ -76,6 +76,9 @@
       setView(view) {
         console.log('view', view, this)
         this.displayView = view
+      },
+      getFormattedPrice(price) {
+        return numeral(price).format('$0.00')
       }
     },
     components: {
@@ -133,7 +136,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1em;
+    grid-gap: 2em;
   }
 
   .grid li {
@@ -148,8 +151,9 @@
 
   .grid .image {
     display: block;
-    width: 100%;
+    max-width: 100%;
     height: auto;
+    margin: 0 auto;
   }
 
   .grid .price {

@@ -29,7 +29,6 @@ export default {
 <style scoped>
 
   section {
-    background: url('/adam-birkett-216660-unsplash.jpg');
     background-size: cover;
   }
 

@@ -35,6 +35,8 @@ export default {
     margin: 0;
     padding: 0;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4em;
+    margin-top: 4em;
   }
 
   .vendor {
@@ -60,7 +62,8 @@ export default {
 
   .image {
     display: block;
-    width: 100%;
-    height: 5em;
+    max-height: 5em;
+    max-width: 10em;
+    margin: 0 auto;
   }
 </style>

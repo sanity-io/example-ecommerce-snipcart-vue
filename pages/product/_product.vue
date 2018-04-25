@@ -19,7 +19,7 @@
       </ul>
       <p v-if="product.blurb" class="blurb">{{product.blurb}}</p>
       <div class="sub-head">
-        <div class="price">$ {{product.defaultProductVariant.price}}</div>
+        <div class="price">{{formattedPrice}}</div>
         <button
           type="button"
           class="snipcart-add-item"
@@ -43,6 +43,7 @@ import ImageViewer from '~/components/ImageViewer'
 import SanityImage from '~/components/SanityImage'
 import Price from '~/components/Price'
 import localize from '~/components/localize'
+import numeral from 'numeral'
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
@@ -68,6 +69,9 @@ export default {
     }
   },
   computed: {
+    formattedPrice: function() {
+      return numeral(this.product.defaultProductVariant.price).format('$0.00')
+    },
     bodyHtml: function() {
       if (!this.product || !this.product.body) {
         return '…'
@@ -90,6 +94,15 @@ export default {
 <style scoped>
 @media only screen and (min-width: 500px)  {
   .container {
+    display: flex;
+  }
+}
+
+@media only screen and (max-width: 1000px)  {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
     display: flex;
   }
 }
