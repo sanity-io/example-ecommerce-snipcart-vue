@@ -45,4 +45,8 @@ $ npm start
 $ npm run generate
 ```
 
+The queries are by default limited to 100 items. This project is just an example, but
+it is possible to expand it with pagination or forever-scroll. To get more items, 
+just add ex [0..1000] to the end of your query https://www.sanity.io/docs/data-store/query-cheat-sheet#slice-operations
+
 For detailed explanations on how Nuxt.js work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
