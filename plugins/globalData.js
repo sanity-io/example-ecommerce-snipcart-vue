@@ -35,8 +35,8 @@ const query = `
  * content displayed by layouts components
  * ( layouts does not have an asyncData() method )
  */
-export default async function( { store } ) {
-  const data =  await sanity.fetch(query).then(data => {
+export default function( { store } ) {
+  return sanity.fetch(query).then(data => {
    
     const root = data.categories.filter(cat => {
       if (!cat.parent) {
