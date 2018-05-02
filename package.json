@@ -18,8 +18,8 @@
     "@sanity/client": "^0.128.3",
     "@sanity/image-url": "^0.128.12",
     "numeral": "^2.0.6",
-    "nuxt": "^1.0.0",
-    "postcss": "^6.0.21",
+    "nuxt": "^1.4.0",
+    "postcss": "^6.0.22",
     "postcss-cssnext": "^3.1.0",
     "vue-line-clamp": "^1.2.3"
   },
@@ -27,8 +27,8 @@
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.9.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-vue": "^4.5.0",
     "prettier": "^1.12.1"
