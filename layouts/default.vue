@@ -66,17 +66,20 @@ export default {
     AppLogo
   },
   mounted() {
-    if (window.Snipcart) {
-      const cart = this.$refs.cart
-      let timeoutId
-      window.Snipcart.subscribe("item.adding", () => {
-        cart.classList.add("pop")
-        clearTimeout(timeoutId)
-        timeoutId = setTimeout(() => {
-          cart.classList.remove("pop")
-        }, 220)
-      })
+    if (!window.Snipcart) {
+      throw new Error(
+        "Snipcart not found. Make sure snipcart is loaded on page. For more info, see https://docs.snipcart.com/getting-started/installation"
+      )
     }
+    const cart = this.$refs.cart
+    let timeoutId
+    window.Snipcart.subscribe("item.adding", () => {
+      cart.classList.add("pop")
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        cart.classList.remove("pop")
+      }, 220)
+    })
   }
 }
 </script>
