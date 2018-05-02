@@ -8,7 +8,6 @@ const attachCategory = (category, categories) => {
            return item._id === child._ref
        })
        category.children.push(attachCategory(orgCat, categories))
-       console.log('children', category)
      })
   }
   return category

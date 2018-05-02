@@ -46,7 +46,6 @@
     },
     methods: {
       setActiveImage(image) {
-        console.log('setactiveimage', image)
         this.activeImage = image
       },
       close() {

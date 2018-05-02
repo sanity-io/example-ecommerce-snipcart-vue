@@ -74,7 +74,6 @@
     },
     methods: {
       setView(view) {
-        console.log('view', view, this)
         this.displayView = view
       },
       getFormattedPrice(price) {
