@@ -4,7 +4,7 @@
       <SanityImage
         :image="images[0]"
         :width="mainImageWidth"
-        class="mainImage"    
+        class="mainImage"
       />
     </div>
     <ul class="list">
@@ -34,7 +34,9 @@ export default {
   components: {
     SanityImage
   },
-  props: ["images"],
+  props: {
+    images: { type: Array, required: true }
+  },
   data() {
     return {
       mainImageWidth: 500,
@@ -43,9 +45,7 @@ export default {
     }
   },
   computed: {
-    mainImage: function() {
-      return this.images[0]
-    }
+    mainImage: () => this.images[0]
   },
   methods: {
     setActiveImage(image) {

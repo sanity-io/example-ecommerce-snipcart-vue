@@ -55,15 +55,9 @@ const query = `
 
 export default {
   asyncData(context) {
-    return sanity.fetch(query, context.route.params).then(
-      data => {
-        return { product: localize(data) }
-      },
-      error => {
-        console.error("Error", error)
-        return false
-      }
-    )
+    return sanity
+      .fetch(query, context.route.params)
+      .then(data => ({ product: localize(data) }))
   },
   components: {
     SanityImage,
