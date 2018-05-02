@@ -1,16 +1,21 @@
 import sanity from '~/sanity.js'
 
-const attachCategory = (category, categories) => {
-  if (category.categories) {
-     category.children = []
-     category.categories.map(child => {
-       const orgCat = find(categories, item => {
-           return item._id === child._ref
-       })
-       category.children.push(attachCategory(orgCat, categories))
-     })
+function isParentOf(category, possibleParent) {
+  if (possibleParent._id === category._id) {
+    return false
   }
-  return category
+  return (category.parents || []).some(
+    parent => parent._ref === possibleParent._id
+  )
+}
+
+const attachCategories = (category, allCategories) => {
+  return {
+    ...category,
+    children: allCategories.filter(otherCategory =>
+      isParentOf(otherCategory, category)
+    )
+  }
 }
 
 const query = `
@@ -35,33 +40,20 @@ const query = `
  * content displayed by layouts components
  * ( layouts does not have an asyncData() method )
  */
-export default function( { store } ) {
-  return sanity.fetch(query).then(data => {
-   
-    const root = data.categories.filter(cat => {
-      if (!cat.parents) {
-        return true
-      }
-    
-      // Note; mutating inside of a filter, not the prettiest
-      cat.parents.forEach(parentRef => {
-        const parent = data.categories.find(candidate => candidate._id === parentRef._ref)
-        if (!parent.children) {
-          parent.children = []
-        }
-    
-        parent.children.push(cat)
-      })
-    
-      // Might want to keep this? Up to you
-      //delete cat.parents
-    
+export default ({ store }) => {
+  return sanity.fetch(query).then(
+    data => {
+      const categories = data.categories.map(category =>
+        attachCategories(category, data.categories)
+      )
+      data.categoryTree = categories.filter(
+        category => (category.parents || []).length === 0
+      )
+      store.commit("globalData", data)
+    },
+    error => {
+      console.error("Error", error)
       return false
-    })
-    data.categoryTree = root
-    store.commit('globalData', data)
-  }, error => {
-    console.error('Error', error)
-    return false
-  })
+    }
+  )
 }
