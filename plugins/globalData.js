@@ -1,4 +1,4 @@
-import sanity from '~/sanity.js'
+import sanity from "~/sanity.js"
 
 function isParentOf(category, possibleParent) {
   if (possibleParent._id === category._id) {

@@ -1,13 +1,13 @@
 <template>
-  <section class="container"  :key="category.id">
+  <section :key="category.id" class="container">
     <div>
-      <h1 class="title">{{category.title}}</h1>
-      <div v-html="bodyHtml" class="body blockContent" />
-      <ProductList :products="category.products" v-if="category.products" />
-      <ul class="sub-categories" v-if="category.categories">
+      <h1 class="title">{{ category.title }}</h1>
+      <div class="body blockContent" v-html="bodyHtml" />
+      <ProductList v-if="category.products" :products="category.products" />
+      <ul v-if="category.categories" class="sub-categories">
         <li v-for="subCat in category.categories" :key="subCat._id">
           <router-link :to="'/category/' + subCat.slug.current">
-            {{subCat.title}}
+            {{ subCat.title }}
           </router-link>
         </li>
       </ul>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import sanity from '~/sanity.js'
-import blocksToHtml from '@sanity/block-content-to-html'
-import ImageViewer from '~/components/ImageViewer'
-import Price from '~/components/Price'
-import localize from '~/components/localize'
-import ProductList from '~/components/ProductList'
+import sanity from "~/sanity.js"
+import blocksToHtml from "@sanity/block-content-to-html"
+import ImageViewer from "~/components/ImageViewer"
+import Price from "~/components/Price"
+import localize from "~/components/localize"
+import ProductList from "~/components/ProductList"
 
 const query = `
   *[_type == "category" && slug.current == $category] {
@@ -35,13 +35,21 @@ const query = `
 `
 
 export default {
-  asyncData (context) {
-    return sanity.fetch(query, context.route.params).then(data => {
-      return {category: localize(data, ['nb', 'en'])}
-    }, error => {
-      console.error('Error', error)
-      return {}
-    })
+  asyncData(context) {
+    return sanity.fetch(query, context.route.params).then(
+      data => {
+        return { category: localize(data, ["nb", "en"]) }
+      },
+      error => {
+        console.error("Error", error)
+        return {}
+      }
+    )
+  },
+  components: {
+    ImageViewer,
+    Price,
+    ProductList
   },
   data: function() {
     return {
@@ -54,35 +62,34 @@ export default {
   },
   computed: {
     bodyHtml: function() {
-      return this.category && this.category.description && blocksToHtml({
-        blocks: this.category.description,
-        dataset: sanity.clientConfig.dataset,
-        projectId: sanity.clientConfig.projectId
-      })
+      return (
+        this.category &&
+        this.category.description &&
+        blocksToHtml({
+          blocks: this.category.description,
+          dataset: sanity.clientConfig.dataset,
+          projectId: sanity.clientConfig.projectId
+        })
+      )
     }
-  },
-  components: {
-    ImageViewer,
-    Price,
-    ProductList
   }
 }
 </script>
 
 <style scoped>
-  .sub-categories {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+.sub-categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 
-  .sub-categories li {
-    display: block;
-    padding: 2em;
-    text-align: center;
-    font-size: 2em;
-  }
+.sub-categories li {
+  display: block;
+  padding: 2em;
+  text-align: center;
+  font-size: 2em;
+}
 
-  .sub-categories a {
-    text-decoration: none;
-  }
+.sub-categories a {
+  text-decoration: none;
+}
 </style>

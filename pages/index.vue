@@ -15,35 +15,32 @@
 </template>
 
 <script>
-
-import AppLogo from '~/components/AppLogo'
+import AppLogo from "~/components/AppLogo"
 
 export default {
   components: {
     AppLogo
   }
 }
-
 </script>
 
 <style scoped>
+section {
+  background-size: cover;
+}
 
-  section {
-    background-size: cover;
-  }
+.title,
+.subtitle {
+  text-align: center;
+  padding: 1em;
+}
 
-  .title, .subtitle {
-    text-align: center;
-    padding: 1em;
-  }
+.title {
+  font-size: 10vw;
+  padding-bottom: 0.5em;
+}
 
-  .title {
-    font-size: 10vw; 
-    padding-bottom: 0.5em;
-  }
-
-  .subtitle {
-    padding-bottom: 3em;
-  }
-
+.subtitle {
+  padding-bottom: 3em;
+}
 </style>

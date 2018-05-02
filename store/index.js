@@ -1,9 +1,9 @@
-import Vuex from 'vuex'
+import Vuex from "vuex"
 
 const createStore = () => {
   return new Vuex.Store({
     mutations: {
-      globalData (state, value) {
+      globalData(state, value) {
         state.globalData = value
       }
     }

@@ -1,49 +1,49 @@
 <template>
-  <section class="container" :key="product._id">
+  <section :key="product._id" class="container">
     <div class="sidebar">
       <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
       <router-link :to="'/vendor/' + product.vendor.slug.current" class="vendor">
         <SanityImage :image="product.vendor.logo" class="vendorLogo" />
-        <div>{{product.vendor.title}}</div>
+        <div>{{ product.vendor.title }}</div>
       </router-link>
     </div>
 
     <div>
-      <h1 class="title">{{product.title}}</h1>
+      <h1 class="title">{{ product.title }}</h1>
       <ul class="categories">
-        <li v-for="category in product.categories" v-if="product.category" v-bind:key="category._id">
+        <li v-for="category in product.categories" :key="category._id">
           <router-link :to="'/category/' + category.slug.current">
-            {{category.title}}
+            {{ category.title }}
           </router-link>
         </li>
       </ul>
-      <p v-if="product.blurb" class="blurb">{{product.blurb}}</p>
+      <p v-if="product.blurb" class="blurb">{{ product.blurb }}</p>
       <div class="sub-head">
-        <div class="price">{{formattedPrice}}</div>
+        <div class="price">{{ formattedPrice }}</div>
         <button
-          type="button"
-          class="snipcart-add-item"
           :data-item-name="product.title"
           :data-item-price="product.defaultProductVariant.price"
           :data-item-id="product._id"
+          type="button"
+          class="snipcart-add-item"
           data-item-url="/"
         >
           Add to cart
         </button>
       </div>
-      <div v-html="bodyHtml" class="body" />
+      <div class="body" v-html="bodyHtml" />
     </div>
   </section>
 </template>
 
 <script>
-import sanity from '~/sanity.js'
-import blocksToHtml from '@sanity/block-content-to-html'
-import ImageViewer from '~/components/ImageViewer'
-import SanityImage from '~/components/SanityImage'
-import Price from '~/components/Price'
-import localize from '~/components/localize'
-import numeral from 'numeral'
+import sanity from "~/sanity.js"
+import blocksToHtml from "@sanity/block-content-to-html"
+import ImageViewer from "~/components/ImageViewer"
+import SanityImage from "~/components/SanityImage"
+import Price from "~/components/Price"
+import localize from "~/components/localize"
+import numeral from "numeral"
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
@@ -54,27 +54,35 @@ const query = `
 `
 
 export default {
-  asyncData (context) {
-    return sanity.fetch(query, context.route.params).then(data => {
-      return {product: localize(data)}
-    }, error => {
-      console.error('Error', error)
-      return false
-    })
+  asyncData(context) {
+    return sanity.fetch(query, context.route.params).then(
+      data => {
+        return { product: localize(data) }
+      },
+      error => {
+        console.error("Error", error)
+        return false
+      }
+    )
+  },
+  components: {
+    SanityImage,
+    ImageViewer,
+    Price
   },
   data: function() {
     return {
-      blurb: 'No blurb text to show',
+      blurb: "No blurb text to show",
       body: false
     }
   },
   computed: {
     formattedPrice: function() {
-      return numeral(this.product.defaultProductVariant.price).format('$0.00')
+      return numeral(this.product.defaultProductVariant.price).format("$0.00")
     },
     bodyHtml: function() {
       if (!this.product || !this.product.body) {
-        return '…'
+        return "…"
       }
       return blocksToHtml({
         blocks: this.product.body,
@@ -82,23 +90,18 @@ export default {
         projectId: sanity.clientConfig.projectId
       })
     }
-  },
-  components: {
-    SanityImage,
-    ImageViewer,
-    Price
   }
 }
 </script>
 
 <style scoped>
-@media only screen and (min-width: 500px)  {
+@media only screen and (min-width: 500px) {
   .container {
     display: flex;
   }
 }
 
-@media only screen and (max-width: 1000px)  {
+@media only screen and (max-width: 1000px) {
   .container {
     flex-direction: column;
   }
@@ -117,7 +120,7 @@ export default {
   line-height: 1.5em;
 }
 
-@media only screen and (min-width: 500px)  {
+@media only screen and (min-width: 500px) {
   .price {
     display: block;
     font-size: 5em;

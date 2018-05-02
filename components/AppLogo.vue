@@ -5,8 +5,8 @@
 </template>
 
 <style scoped>
-  .logo {
-    width: auto;
-    height: 1em;
-  }
+.logo {
+  width: auto;
+  height: 1em;
+}
 </style>

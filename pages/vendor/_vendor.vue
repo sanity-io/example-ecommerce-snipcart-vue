@@ -1,20 +1,20 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="title">{{title}}</h1>
-      <div v-html="bodyHtml" class="body blockContent" />
-      <ProductList v-bind:products="products" v-if="products" />
+      <h1 class="title">{{ title }}</h1>
+      <div class="body blockContent" v-html="bodyHtml" />
+      <ProductList v-if="products" :products="products" />
     </div>
   </section>
 </template>
 
 <script>
-import sanity from '~/sanity.js'
-import blocksToHtml from '@sanity/block-content-to-html'
-import ImageViewer from '~/components/ImageViewer'
-import Price from '~/components/Price'
-import localize from '~/components/localize'
-import ProductList from '~/components/ProductList'
+import sanity from "~/sanity.js"
+import blocksToHtml from "@sanity/block-content-to-html"
+import ImageViewer from "~/components/ImageViewer"
+import Price from "~/components/Price"
+import localize from "~/components/localize"
+import ProductList from "~/components/ProductList"
 
 const query = `
   *[_type == "vendor" && slug.current == $vendor] {
@@ -29,20 +29,25 @@ const query = `
 `
 
 export default {
-  asyncData (context) {
-    return sanity.fetch(query, context.route.params).then(data => {
-      data.bodyHtml = data.description && blocksToHtml({
-        blocks: data.description,
-        dataset: sanity.clientConfig.dataset,
-        projectId: sanity.clientConfig.projectId
-      })
-      return localize(data, ['nb', 'en'])
-    }, error => {
-      console.error('Error', error)
-      return false
-    })
+  asyncData(context) {
+    return sanity.fetch(query, context.route.params).then(
+      data => {
+        data.bodyHtml =
+          data.description &&
+          blocksToHtml({
+            blocks: data.description,
+            dataset: sanity.clientConfig.dataset,
+            projectId: sanity.clientConfig.projectId
+          })
+        return localize(data, ["nb", "en"])
+      },
+      error => {
+        console.error("Error", error)
+        return false
+      }
+    )
   },
-   components: {
+  components: {
     ImageViewer,
     Price,
     ProductList
