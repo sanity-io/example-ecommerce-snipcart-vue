@@ -15,7 +15,7 @@ export default {
     },
     alt: {
       type: String,
-      default: "Missing image text"
+      required: true
     },
     width: {
       default: 200,

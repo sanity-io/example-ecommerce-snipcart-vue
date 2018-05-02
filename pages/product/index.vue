@@ -25,15 +25,7 @@ const query = `
 
 export default {
   asyncData() {
-    return sanity.fetch(query).then(
-      data => {
-        return localize(data)
-      },
-      error => {
-        console.error("Error", error)
-        return false
-      }
-    )
+    return sanity.fetch(query).then(data => localize(data, ["en", "nb"]))
   },
   components: {
     ProductList

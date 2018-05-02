@@ -30,22 +30,19 @@ const query = `
 
 export default {
   asyncData(context) {
-    return sanity.fetch(query, context.route.params).then(
-      data => {
-        data.bodyHtml =
+    return sanity
+      .fetch(query, context.route.params)
+      .then(data => ({
+        ...data,
+        bodyHtml:
           data.description &&
           blocksToHtml({
             blocks: data.description,
             dataset: sanity.clientConfig.dataset,
             projectId: sanity.clientConfig.projectId
           })
-        return localize(data, ["nb", "en"])
-      },
-      error => {
-        console.error("Error", error)
-        return false
-      }
-    )
+      }))
+      .then(data => localize(data, ["nb", "en"]))
   },
   components: {
     ImageViewer,

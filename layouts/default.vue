@@ -66,13 +66,13 @@ export default {
     AppLogo
   },
   mounted() {
-    if (!window) {
-      return
-    } else if (window.Snipcart) {
+    if (window.Snipcart) {
       const cart = this.$refs.cart
-      window.Snipcart.subscribe("item.adding", function() {
+      let timeoutId
+      window.Snipcart.subscribe("item.adding", () => {
         cart.classList.add("pop")
-        setTimeout(function() {
+        clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => {
           cart.classList.remove("pop")
         }, 220)
       })

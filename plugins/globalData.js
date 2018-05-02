@@ -41,19 +41,13 @@ const query = `
  * ( layouts does not have an asyncData() method )
  */
 export default ({ store }) => {
-  return sanity.fetch(query).then(
-    data => {
-      const categories = data.categories.map(category =>
-        attachCategories(category, data.categories)
-      )
-      data.categoryTree = categories.filter(
-        category => (category.parents || []).length === 0
-      )
-      store.commit("globalData", data)
-    },
-    error => {
-      console.error("Error", error)
-      return false
-    }
-  )
+  return sanity.fetch(query).then(data => {
+    const categories = data.categories.map(category =>
+      attachCategories(category, data.categories)
+    )
+    data.categoryTree = categories.filter(
+      category => (category.parents || []).length === 0
+    )
+    store.commit("globalData", data)
+  })
 }
