@@ -14,8 +14,8 @@
 
 <script>
 import sanity from "~/sanity.js"
+import localize from "~/utils/localize"
 import ProductList from "~/components/ProductList"
-import localize from "~/components/localize"
 
 const query = `
   {
