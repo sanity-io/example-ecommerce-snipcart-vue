@@ -1,12 +1,5 @@
 module.exports = {
   /*
-  ** Snipcart
-  */
-  snipcart: {
-    apiKey:
-      "ODRkNmJhZDktOTk5YS00Y2Y1LTk5Y2ItMTkzNTlkZTYxNzhmNjM2NTk1NTI2OTgyMTc1MTUy"
-  },
-  /*
   ** Headers of the page
   */
   head: {
