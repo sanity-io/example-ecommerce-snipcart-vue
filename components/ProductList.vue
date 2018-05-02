@@ -20,10 +20,11 @@
           <SanityImage
             v-if="product.defaultProductVariant.images[0]"
             :image="product.defaultProductVariant.images[0]"
+            :alt="product.title"
             :width="displayView === 'grid' ? 300 : 50"
             class="image"
           />
-          
+
           <div class="title">{{ product.title }}</div>
           <p v-if="displayView === 'grid'" class="blurb">{{ product.blurb }}</p>
         </router-link>
