@@ -15,7 +15,7 @@
       </button>
     </div>
     <ul v-bind:class="displayView" v-if="products.length > 0">
-      <li v-for="product in products" v-bind:key="product._id">
+      <li v-for="product in products" v-bind:key="product._id" class="product">
         <router-link :to="'/product/' + product.slug.current" class="link">
           <SanityImage
             class="image"
@@ -152,8 +152,10 @@
   .grid .image {
     display: block;
     max-width: 100%;
+    max-height: 13rem;
     height: auto;
     margin: 0 auto;
+    margin-bottom: 1rem;
   }
 
   .grid .price {
@@ -197,6 +199,20 @@
     margin: 0;
     padding: 0;
   }
+
+  .grid .product {
+    display: block;
+    padding-bottom: 3rem;
+    position: relative;
+  }
+
+  .grid .product .snipcart-add-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
 
   .no-products {
     text-align: center;

@@ -82,6 +82,7 @@
   .item {
     display: block;
     border: 1px solid #ccc;
+    cursor: pointer;
   }
 
   .item:first-child {

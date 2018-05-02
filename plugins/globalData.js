@@ -1,5 +1,18 @@
 import sanity from '~/sanity.js'
 
+const attachCategory = (category, categories) => {
+  if (category.categories) {
+     category.children = []
+     category.categories.map(child => {
+       const orgCat = find(categories, item => {
+           return item._id === child._ref
+       })
+       category.children.push(attachCategory(orgCat, categories))
+       console.log('children', category)
+     })
+  }
+  return category
+}
 
 const query = `
   {
@@ -7,11 +20,7 @@ const query = `
       _id,
       title,
       slug,
-      "subCategories": categories[]-> {
-        _id,
-        title,
-        slug
-      }
+      parent
     },
     "vendors": *[_type == "vendor"] {
       title,
@@ -29,6 +38,28 @@ const query = `
  */
 export default async function( { store } ) {
   const data =  await sanity.fetch(query).then(data => {
+   
+    const root = data.categories.filter(cat => {
+      if (!cat.parent) {
+        return true
+      }
+    
+      // Note; mutating inside of a filter, not the prettiest
+      cat.parent.forEach(parentRef => {
+        const parent = data.categories.find(candidate => candidate._id === parentRef._ref)
+        if (!parent.children) {
+          parent.children = []
+        }
+    
+        parent.children.push(cat)
+      })
+    
+      // Might want to keep this? Up to you
+      //delete cat.parent
+    
+      return false
+    })
+    data.categoryTree = root
     store.commit('globalData', data)
   }, error => {
     console.error('Error', error)

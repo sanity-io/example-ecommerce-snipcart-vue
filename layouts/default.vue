@@ -26,7 +26,7 @@
     <section class="sidebar">
       <ul class="categories">
         <li
-          v-for="category in this.$store.state.globalData.categories"
+          v-for="category in this.$store.state.globalData.categoryTree"
           :key="category._id"
           v-if="category.slug"
           class="category"
@@ -34,14 +34,14 @@
           <router-link :to="'/category/' + category.slug.current">
             {{category.title}}
           </router-link>
-          <ul v-if="category.categories" class="sub-categories">
+          <ul v-if="category.children" class="sub-categories">
             <li
-              v-for="subCategory in category.categories"
+              v-for="subCategory in category.children"
               :key="category._id + subCategory._id"
               v-if="subCategory.slug"
             >
-              <router-link :to="'/category/' + category.slug.current + '/' + subCategory.slug.current">
-                {{category.title}}
+              <router-link :to="'/category/' + subCategory.slug.current">
+                {{subCategory.title}}
               </router-link>
             </li>
           </ul>
@@ -189,6 +189,18 @@ export default {
     display: none;
     margin: 0 0 0.5rem 0;
     padding: 1rem;
+  }
+
+  .sub-categories {
+    padding: 0;
+    margin: 0;
+    padding-left: 0.8rem;
+  }
+
+  .sub-categories li {
+    display: block;
+    margin: 0;
+    padding: 0;
   }
 
   @media only screen and (min-width: 500px)  {
