@@ -38,11 +38,11 @@
 
 <script>
 import sanity from "~/sanity.js"
+import localize from "~/utils/localize"
 import blocksToHtml from "@sanity/block-content-to-html"
 import ImageViewer from "~/components/ImageViewer"
 import SanityImage from "~/components/SanityImage"
 import Price from "~/components/Price"
-import localize from "~/components/localize"
 import numeral from "numeral"
 
 const query = `

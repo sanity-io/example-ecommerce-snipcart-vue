@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
 import blocksToHtml from "@sanity/block-content-to-html"
+import sanity from "~/sanity.js"
+import localize from "~/utils/localize"
 import ImageViewer from "~/components/ImageViewer"
 import Price from "~/components/Price"
-import localize from "~/components/localize"
 import ProductList from "~/components/ProductList"
 
 const query = `
