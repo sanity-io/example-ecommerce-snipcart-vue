@@ -19,7 +19,7 @@ const query = `
       _id,
       title,
       slug,
-      parent
+      parents
     },
     "vendors": *[_type == "vendor"] {
       title,
@@ -39,12 +39,12 @@ export default function( { store } ) {
   return sanity.fetch(query).then(data => {
    
     const root = data.categories.filter(cat => {
-      if (!cat.parent) {
+      if (!cat.parents) {
         return true
       }
     
       // Note; mutating inside of a filter, not the prettiest
-      cat.parent.forEach(parentRef => {
+      cat.parents.forEach(parentRef => {
         const parent = data.categories.find(candidate => candidate._id === parentRef._ref)
         if (!parent.children) {
           parent.children = []
@@ -54,7 +54,7 @@ export default function( { store } ) {
       })
     
       // Might want to keep this? Up to you
-      //delete cat.parent
+      //delete cat.parents
     
       return false
     })
