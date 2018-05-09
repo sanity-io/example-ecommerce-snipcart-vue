@@ -2,7 +2,7 @@
   <section :key="category.id" class="container">
     <div>
       <h1 class="title">{{ category.title }}</h1>
-      <div class="body blockContent" v-html="bodyHtml" />
+      <div class="description">{{ category.description }}</div>
       <ProductList v-if="category.products" :products="category.products" />
       <ul v-if="category.categories" class="sub-categories">
         <li v-for="subCat in category.categories" :key="subCat._id">
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import blocksToHtml from "@sanity/block-content-to-html"
 import sanity from "~/sanity.js"
 import localize from "~/utils/localize"
 import ImageViewer from "~/components/ImageViewer"
@@ -28,6 +27,7 @@ const query = `
     _id,
     "categories": *[_type == 'category' && references(^._id)],
     title,
+    description,
     "products": *[_type == "product" && references(^._id)] {
       ...
     }
@@ -53,19 +53,6 @@ export default {
         categories: null
       }
     }
-  },
-  computed: {
-    bodyHtml: function() {
-      return (
-        this.category &&
-        this.category.description &&
-        blocksToHtml({
-          blocks: this.category.description,
-          dataset: sanity.clientConfig.dataset,
-          projectId: sanity.clientConfig.projectId
-        })
-      )
-    }
   }
 }
 </script>
@@ -85,5 +72,10 @@ export default {
 
 .sub-categories a {
   text-decoration: none;
+}
+
+.description {
+  margin: 1em 0;
+  max-width: 50em;
 }
 </style>
