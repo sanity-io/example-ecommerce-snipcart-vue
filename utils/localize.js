@@ -1,4 +1,4 @@
-export default function localize(value, languages = ["nb", "en"]) {
+export default function localize(value, languages = ["en", "no", "es"]) {
   if (Array.isArray(value)) {
     return value.map(v => localize(v, languages))
   } else if (typeof value === "object") {
