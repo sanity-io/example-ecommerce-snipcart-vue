@@ -1,23 +1,26 @@
 <template>
   <section :key="product._id" class="container">
+
+    <ul class="categories">
+      <li>
+        <router-link :to="'/vendor/' + product.vendor.slug.current" class="vendor">
+          <SanityImage :image="product.vendor.logo" class="vendorLogo" />
+        </router-link>
+        <!-- {{ product.vendor.title }} -->
+      </li>
+      <li v-for="category in product.categories" :key="category._id">
+        <router-link :to="'/category/' + category.slug.current">
+          {{ category.title }}
+        </router-link>
+      </li>
+    </ul>
+    <h1 class="title">{{ product.title }}</h1>
+    <p v-if="product.blurb" class="blurb">{{ product.blurb }}</p>
     <div class="sidebar">
       <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
-      <router-link :to="'/vendor/' + product.vendor.slug.current" class="vendor">
-        <SanityImage :image="product.vendor.logo" class="vendorLogo" />
-        <div>{{ product.vendor.title }}</div>
-      </router-link>
     </div>
 
     <div>
-      <h1 class="title">{{ product.title }}</h1>
-      <ul class="categories">
-        <li v-for="category in product.categories" :key="category._id">
-          <router-link :to="'/category/' + category.slug.current">
-            {{ category.title }}
-          </router-link>
-        </li>
-      </ul>
-      <p v-if="product.blurb" class="blurb">{{ product.blurb }}</p>
       <div class="sub-head">
         <div class="price">{{ formattedPrice }}</div>
         <button
@@ -89,28 +92,7 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (min-width: 500px) {
-  .container {
-    display: flex;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .container {
-    flex-direction: column;
-  }
-  .sidebar {
-    display: flex;
-  }
-}
-
-.sub-head {
-  display: flex;
-  padding: 2em 0;
-}
-
 .price {
-  font-size: 2.5em;
   line-height: 1.5em;
 }
 
@@ -132,11 +114,13 @@ export default {
 
   .sidebar {
     margin-right: 1em;
+    margin-bottom: 1em;
   }
 }
 
 .blurb {
   font-size: 1.5em;
+  margin: 1em 0;
 }
 
 .categories {
@@ -146,8 +130,9 @@ export default {
 
 .categories :global(li) {
   display: inline-block;
-  margin: 0;
+  margin-right: 1em;
   padding: 0;
+  font-weight: 600;
 }
 
 .categories :global(a) {
@@ -158,7 +143,7 @@ export default {
   border: none;
   color: #000;
   background-color: #fff;
-  border: 3px solid #000;
+  border: 2px solid #000;
   padding: 1em;
   font-size: 1.2em;
   margin-right: 1em;
@@ -175,21 +160,18 @@ export default {
 }
 
 .vendor {
-  display: block;
-  text-align: center;
-  margin: 3em;
-  text-decoration: none;
+  display: inline-block;
 }
 
 .vendorLogo {
-  display: block;
-  max-height: 3em;
-  max-width: 5em;
+  display: inline-block;
+  max-height: 1em;
   margin: 0 auto;
 }
 
 .body {
-  font-size: 1.1em;
+  margin: 1em 0;
+  font-size: 1em;
   line-height: 1.3em;
   max-width: 40em;
 }

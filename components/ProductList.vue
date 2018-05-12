@@ -42,9 +42,6 @@
         </button>
       </li>
     </ul>
-    <p v-else class="no-products">
-      No products to show
-    </p>
   </div>
 </template>
 

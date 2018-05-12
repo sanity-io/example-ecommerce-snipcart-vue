@@ -147,7 +147,7 @@ section.content {
 @media only screen and (min-width: 500px) {
   .logo {
     font-size: 1.5em;
-    margin-right: 2em;
+    margin-right: 0.25em;
   }
 }
 
@@ -161,6 +161,7 @@ nav > ul {
   align-items: center;
   margin: 0;
   padding: 0;
+  font-weight: 700;
 }
 
 nav > ul > li {
@@ -175,13 +176,13 @@ nav > ul > li > a {
 .cart {
   padding: 0.5em;
   margin-left: auto;
-  transition: all 0.2s linear;
+  transition: all 0.05s ease-in-out;
   transform: scale(1);
 }
 
 .cart.pop {
   color: #3cae21;
-  transform: scale(2);
+  transform: scale(1.1);
 }
 
 nav :global(li) {
@@ -203,7 +204,7 @@ ul.categories {
 
 .sub-categories li {
   display: block;
-  margin: 0;
+  margin: 0.5em;
   padding: 0;
 }
 
