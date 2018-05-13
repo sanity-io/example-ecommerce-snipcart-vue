@@ -36,7 +36,7 @@ export default {
   asyncData(context) {
     return sanity
       .fetch(query, context.route.params)
-      .then(data => ({ category: localize(data, ["nb", "en"]) }))
+      .then(data => ({ category: localize(data) }))
   },
   components: {
     ImageViewer,
