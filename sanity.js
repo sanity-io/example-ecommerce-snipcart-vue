@@ -1,6 +1,6 @@
-import sanityClient from "@sanity/client"
+const sanityClient = require("@sanity/client")
 
-export default sanityClient({
+module.exports = sanityClient({
   // Find your project ID and dataset in `sanity.json` in your studio project or on https://manage.sanity.io
   projectId: "ru2xdibx",
   dataset: "production",

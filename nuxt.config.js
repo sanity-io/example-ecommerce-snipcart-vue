@@ -1,3 +1,5 @@
+const client = require("./sanity.js")
+
 module.exports = {
   /*
   ** Headers of the page
@@ -70,6 +72,22 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    }
+  },
+  generate: {
+    routes: async function() {
+      const paths = await client.fetch(`{
+        "product": *[_type == "product"].slug.current,
+        "category": *[_type == "category"].slug.current,
+        "vendor": *[_type == "vendor"].slug.current
+      }`)
+      return Object.keys(paths).reduce(
+        (acc, key) => [
+          ...acc,
+          ...paths[key].reduce((acc, curr) => [...acc, `${key}/${curr}`], [])
+        ],
+        []
+      )
     }
   }
 }
