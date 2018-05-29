@@ -1,5 +1,5 @@
 <template>
-  <section :key="product._id" class="container">
+  <section :key="product._id">
 
     <ul class="categories">
       <li>
@@ -14,27 +14,31 @@
         </router-link>
       </li>
     </ul>
-    <h1 class="title">{{ product.title }}</h1>
-    <p v-if="product.blurb" class="blurb">{{ product.blurb }}</p>
-    <div class="sidebar">
-      <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
-    </div>
 
-    <div>
-      <div class="sub-head">
-        <div class="price">{{ formattedPrice }}</div>
-        <button
-          :data-item-name="product.title"
-          :data-item-price="product.defaultProductVariant.price"
-          :data-item-id="product._id"
-          type="button"
-          class="snipcart-add-item"
-          data-item-url="/"
-        >
-          Add to cart
-        </button>
+    <div class="container">
+      <div>
+        <h1 class="title">{{ product.title }}</h1>
+        <p v-if="product.blurb" class="blurb">{{ product.blurb }}</p>
+        <div class="sub-head">
+          <div class="price-and-button">
+            <div class="price">{{ formattedPrice }}</div>
+            <button
+              :data-item-name="product.title"
+              :data-item-price="product.defaultProductVariant.price"
+              :data-item-id="product._id"
+              type="button"
+              class="snipcart-add-item"
+              data-item-url="/"
+            >
+              Add to cart
+            </button>
+          </div>
+        </div>
+        <div class="body" v-html="bodyHtml" />
       </div>
-      <div class="body" v-html="bodyHtml" />
+      <div class="sidebar">
+        <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
+      </div>
     </div>
   </section>
 </template>
@@ -97,6 +101,23 @@ export default {
 }
 
 @media only screen and (min-width: 500px) {
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    display: flex;
+  }
+}
+
+@media only screen and (min-width: 500px) {
   .price {
     display: block;
     font-size: 5em;
@@ -123,20 +144,33 @@ export default {
   margin: 1em 0;
 }
 
+.price-and-button {
+  display: flex;
+  align-items: center;
+}
+
 .categories {
   margin: 0;
-  padding: 1em 0;
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 .categories :global(li) {
-  display: inline-block;
-  margin-right: 1em;
+  display: block;
+  margin-right: 0.5em;
   padding: 0;
   font-weight: 600;
 }
 
 .categories :global(a) {
   text-decoration: none;
+  display: block;
+  padding: 1em 0;
+}
+
+.categories :global(img) {
+  display: block;
 }
 
 .snipcart-add-item {
@@ -165,8 +199,9 @@ export default {
 
 .vendorLogo {
   display: inline-block;
-  max-height: 1em;
   margin: 0 auto;
+  max-height: 1.5em;
+  max-width: 8em;
 }
 
 .body {

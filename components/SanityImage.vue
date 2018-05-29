@@ -15,7 +15,7 @@ export default {
     },
     alt: {
       type: String,
-      required: true
+      default: "Missing caption"
     },
     width: {
       default: 200,

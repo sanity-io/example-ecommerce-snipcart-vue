@@ -2,16 +2,16 @@
   <div>
     <div v-if="products.length > 0" class="switchView">
       <button
-        :class="displayView === 'list' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
-        @click="setView('list')"
-      >
-        List
-      </button>
-      <button
         :class="displayView === 'grid' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
         @click="setView('grid')"
       >
         Grid
+      </button>
+      <button
+        :class="displayView === 'list' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
+        @click="setView('list')"
+      >
+        List
       </button>
     </div>
     <ul v-if="products.length > 0" :class="displayView">
@@ -29,17 +29,19 @@
           <p v-if="displayView === 'grid'" class="blurb">{{ product.blurb }}</p>
         </router-link>
 
-        <span class="price">{{ getFormattedPrice(product.defaultProductVariant.price) }}</span>
+        <div class="price-and-button">
+          <span class="price">{{ getFormattedPrice(product.defaultProductVariant.price) }}</span>
 
-        <!-- Easy integration with snipcart. See readme for more info -->
-        <button :data-item-name="product.title" :data-item-price="product.defaultProductVariant.price"
-                :data-item-id="product._id"
-                type="button"
-                class="snipcart-add-item"
-                data-item-url="/"
-        >
-          Add to cart
-        </button>
+          <!-- Easy integration with snipcart. See readme for more info -->
+          <button :data-item-name="product.title" :data-item-price="product.defaultProductVariant.price"
+                  :data-item-id="product._id"
+                  type="button"
+                  class="snipcart-add-item"
+                  data-item-url="/"
+          >
+            Add to cart
+          </button>
+        </div>
       </li>
     </ul>
   </div>
@@ -65,12 +67,12 @@ export default {
     },
     view: {
       type: String,
-      default: "list"
+      default: "grid"
     }
   },
   data(context) {
     return {
-      displayView: context._props.view || "list"
+      displayView: context._props.view || "grid"
     }
   },
   methods: {
@@ -136,6 +138,10 @@ export default {
   grid-gap: 2em;
 }
 
+.grid .title {
+  font-weight: 600;
+}
+
 .grid li {
   display: flex;
   flex-direction: column;
@@ -156,7 +162,14 @@ export default {
 }
 
 .grid .price {
+  display: block;
   font-size: 2em;
+}
+
+.grid .price-and-button {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .image {
@@ -201,13 +214,6 @@ ul {
   display: block;
   padding-bottom: 3rem;
   position: relative;
-}
-
-.grid .product .snipcart-add-item {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 }
 
 .no-products {
