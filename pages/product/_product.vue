@@ -54,9 +54,9 @@ import numeral from "numeral"
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
+    ...,
     categories[]->,
-    vendor->,
-    ...
+    vendor->
   }
 `
 

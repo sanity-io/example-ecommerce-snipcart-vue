@@ -28,9 +28,7 @@ const query = `
     "categories": *[_type == 'category' && references(^._id)],
     title,
     description,
-    "products": *[_type == "product" && references(^._id)] {
-      ...
-    }
+    "products": *[_type == "product" && references(^._id)]
   }[0]
 `
 

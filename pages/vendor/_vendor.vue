@@ -22,9 +22,7 @@ const query = `
     title,
     logo,
     description,
-    "products": *[_type == "product" && references(^._id)] {
-      ...
-    }
+    "products": *[_type == "product" && references(^._id)]
   }[0]
 `
 
