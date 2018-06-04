@@ -45,7 +45,7 @@ $ npm start
 $ npm run generate
 ```
 
-If you want to host this on Netlify, as a static build, follow [these steps](https://www.sanity.io/blog/tutorial-host-your-sanity-based-next-js-project-on-netlify#3-deploy-your-blog-on-netlify) while simply substituting the `generate` command above.
+If you want to host this on Netlify, as a static build, follow [these steps](https://www.sanity.io/blog/tutorial-host-your-sanity-based-next-js-project-on-netlify#3-deploy-your-blog-on-netlify) while switching out the `generate` command above and changing the output directory from `out` to `dist`.
 
 The queries are by default limited to 100 items. This project is just an example, but
 it is possible to expand it with pagination or forever-scroll. To get more items, 
