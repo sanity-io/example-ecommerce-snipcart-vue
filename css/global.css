@@ -29,7 +29,7 @@ h2.subtitle {
 }
 
 a {
-  color: #35495e;
+  color: inherit;
 }
 
 a:active {

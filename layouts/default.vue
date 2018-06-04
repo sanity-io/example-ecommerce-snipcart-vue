@@ -124,7 +124,6 @@ section.content {
 
 .snipcart-checkout {
   text-decoration: none;
-  color: inherit;
 }
 
 .snipcart-total-price {
@@ -169,7 +168,6 @@ nav > ul > li {
 }
 
 nav > ul > li > a {
-  color: inherit;
   text-decoration: inherit;
 }
 
@@ -225,7 +223,6 @@ ul.categories {
 }
 
 ul.categories :global(a) {
-  color: inherit;
   text-decoration: none;
 }
 </style>

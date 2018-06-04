@@ -207,7 +207,6 @@ export default {
 
 .link {
   text-decoration: none;
-  color: inherit;
 }
 
 ul {
