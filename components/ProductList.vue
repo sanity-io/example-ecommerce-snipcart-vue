@@ -167,9 +167,10 @@ export default {
 }
 
 .grid .price-and-button {
-  margin-top: 1em;
   display: flex;
   justify-content: space-between;
+  padding-top: 1em;
+  margin-top: auto;
 }
 
 .image {
@@ -210,8 +211,11 @@ ul {
   padding: 0;
 }
 
+.product {
+  display: flex;
+}
+
 .grid .product {
-  display: block;
   padding-bottom: 3rem;
   position: relative;
 }
