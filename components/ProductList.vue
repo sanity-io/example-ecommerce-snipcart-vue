@@ -132,6 +132,20 @@ export default {
   margin-right: 1em;
 }
 
+.list .title {
+  margin-right: 1em;
+}
+
+.list .snipcart-add-item {
+  white-space: nowrap;
+}
+
+.list .price-and-button {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -155,10 +169,11 @@ export default {
 .grid .image {
   display: block;
   max-width: 100%;
-  max-height: 13rem;
-  height: auto;
+  width: auto;
+  height: 13rem;
   margin: 0 auto;
   margin-bottom: 1rem;
+  object-fit: contain;
 }
 
 .grid .price {
@@ -173,31 +188,21 @@ export default {
   margin-top: auto;
 }
 
-.image {
-  grid-area: image;
-}
-
 .link {
-  display: sub-grid;
+  display: block;
 }
 
 .price {
-  grid-area: price;
+  display: block;
 }
 
 .title {
   font-size: 1.2em;
-  grid-area: header;
 }
 
 .snipcart-add-item {
-  grid-area: cart;
   font-size: 1.1em;
   padding: 0.5em 1em;
-}
-
-.blurb {
-  grid-area: info;
 }
 
 .link {
