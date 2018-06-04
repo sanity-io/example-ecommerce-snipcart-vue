@@ -174,13 +174,13 @@ nav > ul > li > a {
 .cart {
   padding: 0.5em;
   margin-left: auto;
-  transition: all 0.05s ease-in-out;
+  transition: all 0.1s ease-in;
   transform: scale(1);
 }
 
 .cart.pop {
   color: #3cae21;
-  transform: scale(1.1);
+  transform: scale(0.9);
 }
 
 nav :global(li) {
