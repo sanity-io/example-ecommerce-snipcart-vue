@@ -1,4 +1,6 @@
-# Frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema 
+# The Transglobal Candy Store
+
+A frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema 
 
 ## Quick start development
 
