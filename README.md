@@ -8,7 +8,7 @@ A frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema
 
 ``` bash
 # install dependencies
-$ npm install # Or yarn
+$ npm install
 
 # serve with hot reload at localhost:3000
 $ npm run dev
