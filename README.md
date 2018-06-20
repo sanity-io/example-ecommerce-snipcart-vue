@@ -2,7 +2,7 @@
 
 A frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema
 
-🔗 [Blog post](https://www.sanity.io/blog/e-commerce-sample-schema)
+🔗 [Read the blog post](https://www.sanity.io/blog/e-commerce-vue-nuxt-snipcart)
 
 ## Quick start development
 
