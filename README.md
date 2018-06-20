@@ -4,7 +4,10 @@ A frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema
 
 🔗 [Read the blog post](https://www.sanity.io/blog/e-commerce-vue-nuxt-snipcart)
 
-## Quick start development
+![Short animated preview of the app](https://public.sanity.io/github-assets/snipcart-for-github.gif "Logo Title Text 1")
+
+
+## Quickstart on local
 
 ``` bash
 # install dependencies
