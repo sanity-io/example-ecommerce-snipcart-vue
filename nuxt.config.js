@@ -1,6 +1,6 @@
-const client = require("./sanity.js")
+import client from "./sanity.js"
 
-module.exports = {
+export default {
   /*
   ** Headers of the page
   */
