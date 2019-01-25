@@ -1,5 +1,6 @@
 <template>
-  <img :src="imageUrl" :alt="alt" >
+  <!-- prettier-ignore -->
+  <img :src="imageUrl" :alt="alt">
 </template>
 
 <script>

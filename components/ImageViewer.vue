@@ -20,7 +20,10 @@
 
     <div v-if="activeImage" class="activeImage">
       <svg class="close" viewBox="0 0 96 96" @keyup.esc="close" @click="close">
-        <polygon fill="currentColor" points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "/>
+        <polygon
+          fill="currentColor"
+          points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "
+        />
       </svg>
       <SanityImage :image="activeImage" class="image" width="1000" />
     </div>

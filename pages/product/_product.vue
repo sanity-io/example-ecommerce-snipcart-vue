@@ -1,9 +1,11 @@
 <template>
   <section :key="product._id">
-
     <ul class="categories">
       <li>
-        <router-link :to="'/vendor/' + product.vendor.slug.current" class="vendor">
+        <router-link
+          :to="'/vendor/' + product.vendor.slug.current"
+          class="vendor"
+        >
           <SanityImage :image="product.vendor.logo" class="vendorLogo" />
         </router-link>
         <!-- {{ product.vendor.title }} -->
@@ -37,7 +39,10 @@
         <div class="body" v-html="bodyHtml" />
       </div>
       <div class="sidebar">
-        <ImageViewer :images="product.defaultProductVariant.images" class="image-viewer" />
+        <ImageViewer
+          :images="product.defaultProductVariant.images"
+          class="image-viewer"
+        />
       </div>
     </div>
   </section>

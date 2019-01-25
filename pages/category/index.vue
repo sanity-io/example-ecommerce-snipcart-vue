@@ -5,8 +5,14 @@
         Categories
       </h1>
       <ul class="categories">
-        <li v-for="category in this.$store.state.globalData.categories" v-if="category.slug" :key="category._id">
-          <router-link :to="'/category/' + category.slug.current">
+        <li
+          v-for="category in this.$store.state.globalData.categories"
+          :key="category._id"
+        >
+          <router-link
+            v-if="category.slug"
+            :to="'/category/' + category.slug.current"
+          >
             {{ category.title }}
           </router-link>
         </li>

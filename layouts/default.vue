@@ -15,11 +15,10 @@
         <a href="#" class="snipcart-checkout">
           <div class="snipcart-summary">
             🛒
-            <span class="snipcart-total-items"/> items
-            <span class="snipcart-total-price"/>
+            <span class="snipcart-total-items" /> items
+            <span class="snipcart-total-price" />
           </div>
         </a>
-
       </div>
     </header>
 
@@ -50,13 +49,14 @@
     </section>
 
     <section class="content">
-      <nuxt/>
+      <nuxt />
     </section>
 
-    <div class="footer">A Sanity E-commerce example frontend in vue.js / nuxt.js</div>
+    <div class="footer">
+      A Sanity E-commerce example frontend in vue.js / nuxt.js
+    </div>
   </div>
 </template>
-
 
 <script>
 import AppLogo from "~/components/AppLogo.vue"
