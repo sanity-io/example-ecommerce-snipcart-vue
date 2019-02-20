@@ -2,8 +2,8 @@ import client from "./sanity.js"
 
 export default {
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: "ecommerce-frontend",
     meta: [
@@ -41,28 +41,28 @@ export default {
     ]
   },
   /*
-  ** Customize the progress bar color
-  */
+   ** Customize the progress bar color
+   */
   loading: { color: "#3B8070" },
   /*
-  ** Load categories and vendors
-  */
+   ** Load categories and vendors
+   */
   plugins: ["~/plugins/globalData"],
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: ["~/css/global.css"],
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** postcss
-    */
+     ** postcss
+     */
     postcss: [require("postcss-cssnext")()],
     /*
-    ** Run ESLint on save
-    */
+     ** Run ESLint on save
+     */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({

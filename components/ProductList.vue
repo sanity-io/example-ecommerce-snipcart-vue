@@ -2,13 +2,21 @@
   <div>
     <div v-if="products.length > 0" class="switchView">
       <button
-        :class="displayView === 'grid' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
+        :class="
+          displayView === 'grid'
+            ? 'switchViewButton switchViewButtonActive'
+            : 'switchViewButton'
+        "
         @click="setView('grid')"
       >
         Grid
       </button>
       <button
-        :class="displayView === 'list' ? 'switchViewButton switchViewButtonActive' : 'switchViewButton'"
+        :class="
+          displayView === 'list'
+            ? 'switchViewButton switchViewButtonActive'
+            : 'switchViewButton'
+        "
         @click="setView('list')"
       >
         List
@@ -30,14 +38,18 @@
         </router-link>
 
         <div class="price-and-button">
-          <span class="price">{{ getFormattedPrice(product.defaultProductVariant.price) }}</span>
+          <span class="price">{{
+            getFormattedPrice(product.defaultProductVariant.price)
+          }}</span>
 
           <!-- Easy integration with snipcart. See readme for more info -->
-          <button :data-item-name="product.title" :data-item-price="product.defaultProductVariant.price"
-                  :data-item-id="product._id"
-                  type="button"
-                  class="snipcart-add-item"
-                  data-item-url="/"
+          <button
+            :data-item-name="product.title"
+            :data-item-price="product.defaultProductVariant.price"
+            :data-item-id="product._id"
+            type="button"
+            class="snipcart-add-item"
+            data-item-url="/"
           >
             Add to cart
           </button>
@@ -46,7 +58,6 @@
     </ul>
   </div>
 </template>
-
 
 <script>
 import SanityImage from "~/components/SanityImage"

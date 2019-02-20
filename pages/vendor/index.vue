@@ -5,9 +5,21 @@
         Vendors
       </h1>
       <ul class="vendors">
-        <li v-for="vendor in this.$store.state.globalData.vendors" v-if="vendor.slug" :key="vendor._id" class="vendor">
-          <router-link :to="'/vendor/' + vendor.slug.current" class="link">
-            <SanityImage v-if="vendor.logo" :image="vendor.logo" class="image" />
+        <li
+          v-for="vendor in this.$store.state.globalData.vendors"
+          :key="vendor._id"
+          class="vendor"
+        >
+          <router-link
+            v-if="vendor.slug"
+            :to="'/vendor/' + vendor.slug.current"
+            class="link"
+          >
+            <SanityImage
+              v-if="vendor.logo"
+              :image="vendor.logo"
+              class="image"
+            />
             <div class="meta">
               <span class="vendorTitle">{{ vendor.title }}</span>
               &nbsp;<span class="qty">({{ vendor.productQty }})</span>
