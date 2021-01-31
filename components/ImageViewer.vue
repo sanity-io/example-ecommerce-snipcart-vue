@@ -2,7 +2,7 @@
   <div class="root">
     <div style="cursor: pointer" @click="setActiveImage(images[0])">
       <SanityImage
-        :image="images[0]"
+        :asset-id="images[0].asset._ref"
         :width="mainImageWidth"
         class="mainImage"
       />
@@ -14,7 +14,11 @@
         class="item"
         @click="setActiveImage(image)"
       >
-        <SanityImage :image="image" :width="imageWidth" class="image" />
+        <SanityImage
+          :asset-id="image.asset._ref"
+          :width="imageWidth"
+          class="image"
+        />
       </li>
     </ul>
 
@@ -25,30 +29,29 @@
           points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "
         />
       </svg>
-      <SanityImage :image="activeImage" class="image" width="1000" />
+      <SanityImage
+        :asset-id="activeImage.asset._ref"
+        class="image"
+        width="1000"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import SanityImage from "./SanityImage"
-
 export default {
-  components: {
-    SanityImage
-  },
   props: {
-    images: { type: Array, required: true }
+    images: { type: Array, required: true },
   },
   data() {
     return {
       mainImageWidth: 500,
       imageWidth: 200,
-      activeImage: null
+      activeImage: null,
     }
   },
   computed: {
-    mainImage: () => this.images[0]
+    mainImage: () => this.images[0],
   },
   methods: {
     setActiveImage(image) {
@@ -56,8 +59,8 @@ export default {
     },
     close() {
       this.activeImage = null
-    }
-  }
+    },
+  },
 }
 </script>
 

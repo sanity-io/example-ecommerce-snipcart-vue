@@ -24,18 +24,18 @@
     </div>
     <ul v-if="products.length > 0" :class="displayView">
       <li v-for="product in products" :key="product._id" class="product">
-        <router-link :to="'/product/' + product.slug.current" class="link">
+        <NuxtLink :to="'/product/' + product.slug.current" class="link">
           <SanityImage
             v-if="product.defaultProductVariant.images[0]"
-            :image="product.defaultProductVariant.images[0]"
+            :asset-id="product.defaultProductVariant.images[0].asset._ref"
             :alt="product.title"
             :width="displayView === 'grid' ? 300 : 50"
             class="image"
           />
 
-          <div class="title">{{ product.title }}</div>
+          <h3 class="title">{{ product.title }}</h3>
           <p v-if="displayView === 'grid'" class="blurb">{{ product.blurb }}</p>
-        </router-link>
+        </NuxtLink>
 
         <div class="price-and-button">
           <span class="price">{{
@@ -60,30 +60,21 @@
 </template>
 
 <script>
-import SanityImage from "~/components/SanityImage"
-import lineClamp from "vue-line-clamp"
-import numeral from "numeral"
-
 export default {
-  directives: {
-    lineClamp
-  },
-  components: {
-    SanityImage
-  },
   props: {
     products: {
       type: Array,
-      required: true
+      required: true,
+      default: () => [],
     },
     view: {
       type: String,
-      default: "grid"
-    }
+      default: 'grid',
+    },
   },
-  data(context) {
+  data() {
     return {
-      displayView: context._props.view || "grid"
+      displayView: this.view,
     }
   },
   methods: {
@@ -91,9 +82,12 @@ export default {
       this.displayView = view
     },
     getFormattedPrice(price) {
-      return numeral(price).format("$0.00")
-    }
-  }
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price)
+    },
+  },
 }
 </script>
 

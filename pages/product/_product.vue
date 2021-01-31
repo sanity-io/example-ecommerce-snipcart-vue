@@ -2,18 +2,18 @@
   <section :key="product._id">
     <ul class="categories">
       <li>
-        <router-link
-          :to="'/vendor/' + product.vendor.slug.current"
-          class="vendor"
-        >
-          <SanityImage :image="product.vendor.logo" class="vendorLogo" />
-        </router-link>
-        <!-- {{ product.vendor.title }} -->
+        <NuxtLink :to="'/vendor/' + product.vendor.slug.current" class="vendor">
+          <SanityImage
+            :asset-id="product.vendor.logo.asset._ref"
+            class="vendorLogo"
+          />
+        </NuxtLink>
+        {{ product.vendor.title }}
       </li>
       <li v-for="category in product.categories" :key="category._id">
-        <router-link :to="'/category/' + category.slug.current">
+        <NuxtLink :to="'/category/' + category.slug.current">
           {{ category.title }}
-        </router-link>
+        </NuxtLink>
       </li>
     </ul>
 
@@ -36,7 +36,11 @@
             </button>
           </div>
         </div>
-        <div class="body" v-html="bodyHtml" />
+        <SanityContent
+          v-if="product.body"
+          class="body"
+          :blocks="product.body"
+        />
       </div>
       <div class="sidebar">
         <ImageViewer
@@ -49,13 +53,7 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import blocksToHtml from "@sanity/block-content-to-html"
-import ImageViewer from "~/components/ImageViewer"
-import SanityImage from "~/components/SanityImage"
-import Price from "~/components/Price"
-import numeral from "numeral"
+import localize from '~/utils/localize'
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
@@ -66,37 +64,20 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
-      .fetch(query, context.route.params)
-      .then(data => ({ product: localize(data) }))
-  },
-  components: {
-    SanityImage,
-    ImageViewer,
-    Price
-  },
-  data: function() {
-    return {
-      blurb: "No blurb text to show",
-      body: false
-    }
+  name: 'Product',
+  asyncData({ $sanity, params }) {
+    return $sanity
+      .fetch(query, params)
+      .then((data) => ({ product: localize(data) }))
   },
   computed: {
-    formattedPrice: function() {
-      return numeral(this.product.defaultProductVariant.price).format("$0.00")
+    formattedPrice() {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(this.product.defaultProductVariant.price)
     },
-    bodyHtml: function() {
-      if (!this.product || !this.product.body) {
-        return "…"
-      }
-      return blocksToHtml({
-        blocks: this.product.body,
-        dataset: sanity.clientConfig.dataset,
-        projectId: sanity.clientConfig.projectId
-      })
-    }
-  }
+  },
 }
 </script>
 
@@ -155,6 +136,7 @@ export default {
 }
 
 .categories {
+  list-style-type: none;
   margin: 0;
   display: flex;
   align-items: center;
