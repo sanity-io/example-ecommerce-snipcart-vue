@@ -2,7 +2,11 @@
   <section class="container">
     <div>
       <h1 class="title">{{ title }}</h1>
-      <div class="body blockContent" v-html="bodyHtml" />
+      <SanityContent
+        class="body blockContent"
+        :blocks="description"
+        v-if="description"
+      ></SanityContent>
       <ProductList v-if="products" :products="products" />
     </div>
   </section>
@@ -10,7 +14,6 @@
 
 <script>
 import localize from '~/utils/localize'
-import blocksToHtml from '@sanity/block-content-to-html'
 
 const query = `
   *[_type == "vendor" && slug.current == $vendor] {
@@ -23,19 +26,11 @@ const query = `
 `
 
 export default {
-  asyncData({ $sanity }) {
+  name: 'Vendor',
+  asyncData({ $sanity, params }) {
     return $sanity
-      .fetch(query, context.route.params)
-      .then((data) => ({
-        ...data,
-        bodyHtml:
-          data.description &&
-          blocksToHtml({
-            blocks: data.description,
-            dataset: sanity.clientConfig.dataset,
-            projectId: sanity.clientConfig.projectId,
-          }),
-      }))
+      .fetch(query, params)
+      .then((data) => data)
       .then((data) => localize(data, ['nb', 'en']))
   },
 }

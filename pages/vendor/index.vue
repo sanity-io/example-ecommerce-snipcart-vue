@@ -13,11 +13,11 @@
             :to="'/vendor/' + vendor.slug.current"
             class="link"
           >
-            <SanityImage
+            <!--    <SanityImage
               v-if="vendor.logo"
               :image="vendor.logo"
               class="image"
-            />
+            /> -->
             <div class="meta">
               <span class="vendorTitle">{{ vendor.title }}</span>
               &nbsp;<span class="qty">({{ vendor.productQty }})</span>

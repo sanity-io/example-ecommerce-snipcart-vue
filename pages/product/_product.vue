@@ -6,9 +6,12 @@
           :to="'/vendor/' + product.vendor.slug.current"
           class="vendor"
         >
-          <SanityImage :image="product.vendor.logo" class="vendorLogo" />
+          <SanityImage
+            :asset-id="product.vendor.logo.asset._ref"
+            class="vendorLogo"
+          />
         </router-link>
-        <!-- {{ product.vendor.title }} -->
+        {{ product.vendor.title }}
       </li>
       <li v-for="category in product.categories" :key="category._id">
         <router-link :to="'/category/' + category.slug.current">
@@ -36,7 +39,11 @@
             </button>
           </div>
         </div>
-        <div class="body" v-html="bodyHtml" />
+        <SanityContent
+          class="body"
+          :blocks="product.body"
+          v-if="product.body"
+        />
       </div>
       <div class="sidebar">
         <ImageViewer
@@ -50,7 +57,6 @@
 
 <script>
 import localize from '~/utils/localize'
-import blocksToHtml from '@sanity/block-content-to-html'
 import numeral from 'numeral'
 
 const query = `
@@ -62,12 +68,13 @@ const query = `
 `
 
 export default {
+  name: 'Product',
   asyncData({ $sanity, params }) {
     return $sanity
       .fetch(query, params)
       .then((data) => ({ product: localize(data) }))
   },
-  data: function () {
+  data() {
     return {
       blurb: 'No blurb text to show',
       body: false,
@@ -76,16 +83,6 @@ export default {
   computed: {
     formattedPrice: function () {
       return numeral(this.product.defaultProductVariant.price).format('$0.00')
-    },
-    bodyHtml: function () {
-      if (!this.product || !this.product.body) {
-        return '…'
-      }
-      return blocksToHtml({
-        blocks: this.product.body,
-        dataset: sanity.clientConfig.dataset,
-        projectId: sanity.clientConfig.projectId,
-      })
     },
   },
 }

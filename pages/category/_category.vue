@@ -30,7 +30,7 @@ const query = `
 
 export default {
   asyncData({ $sanity, params }) {
-    return s$anity
+    return $sanity
       .fetch(query, params)
       .then((data) => ({ category: localize(data) }))
   },

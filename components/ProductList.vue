@@ -27,7 +27,7 @@
         <router-link :to="'/product/' + product.slug.current" class="link">
           <SanityImage
             v-if="product.defaultProductVariant.images[0]"
-            :image="product.defaultProductVariant.images[0]"
+            :asset-id="product.defaultProductVariant.images[0].asset._ref"
             :alt="product.title"
             :width="displayView === 'grid' ? 300 : 50"
             class="image"
@@ -60,13 +60,9 @@
 </template>
 
 <script>
-import lineClamp from 'vue-line-clamp'
 import numeral from 'numeral'
 
 export default {
-  directives: {
-    lineClamp,
-  },
   props: {
     products: {
       type: Array,
