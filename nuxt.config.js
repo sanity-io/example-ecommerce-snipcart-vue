@@ -1,3 +1,13 @@
+import { createClient } from '@nuxtjs/sanity'
+
+const configSanity = {
+  projectId: '5zj51uy1',
+  minimal: true,
+  useCdn: false,
+}
+
+const client = createClient(configSanity)
+
 export default {
   /*
    ** Nuxt target
@@ -18,15 +28,7 @@ export default {
         content: 'Sanity frontend example for E-commerce in Vue.js',
       },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // Snipcart styling
-      {
-        href: 'https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css',
-        type: 'text/css',
-        rel: 'stylesheet',
-      },
-    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress bar color
@@ -49,25 +51,22 @@ export default {
    */
   css: ['~/css/global.css'],
   /*
+  
    ** Build configuration
    */
   build: {},
 
   // https://sanity.nuxtjs.org
-  sanity: {
-    projectId: '5zj51uy1',
-    minimal: true,
-  },
+  sanity: configSanity,
 
   snipcart: {
-    // Options available
-
     key:
       'OWQ1NGI5ZTUtNDViYi00NTBhLWFkOTItOWIzMjM1YTRiNmY2NjM3NDc2NzY1OTA4MDY0NTA1',
-    /*    locales: {}, */
   },
-  /*   generate: {
-    routes: async function () {
+  generate: {
+    fallback: true,
+    crawler: true,
+    /*   async routes() {
       const paths = await client.fetch(`{
         "product": *[_type == "product"].slug.current,
         "category": *[_type == "category"].slug.current,
@@ -80,6 +79,6 @@ export default {
         ],
         []
       )
-    },
-  }, */
+    }, */
+  },
 }
