@@ -11,7 +11,7 @@
           <li><router-link :to="'/vendor'">Vendors</router-link></li>
         </ul>
       </nav>
-      <div ref="cart" class="cart">
+      <div class="cart">
         <a href="#" class="snipcart-checkout">
           <div class="snipcart-summary">
             🛒
