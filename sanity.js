@@ -2,7 +2,7 @@ const sanityClient = require("@sanity/client")
 
 module.exports = sanityClient({
   // Find your project ID and dataset in `sanity.json` in your studio project or on https://manage.sanity.io
-  projectId: "ru2xdibx",
+  projectId: "5zj51uy1",
   dataset: "production",
   useCdn: true
   // useCdn == true gives fast, cheap responses using a globally distributed cache.
