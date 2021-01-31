@@ -1268,6 +1268,11 @@
     defu "3.2.2"
     upath "^2.0.1"
 
+"@nuxtjs/snipcart@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/snipcart/-/snipcart-1.1.1.tgz#26f363195bf1800d9c1c74b8d7ed923dff1ab750"
+  integrity sha512-XwyhckiVRQN8NufMbUbVyFt7RRjDjBMwTAfGwmQzu0eNIOZlyO6yHsgVgI9cLdxFDzl5WRXpiH1llPv9VLVq0Q==
+
 "@nuxtjs/youch@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@nuxtjs/youch/-/youch-4.2.3.tgz#36f8b22df5a0efaa81373109851e1d857aca6bed"

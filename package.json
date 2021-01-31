@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@nuxtjs/sanity": "^0.6.2",
+    "@nuxtjs/snipcart": "^1.1.1",
     "numeral": "^2.0.6",
     "nuxt": "^2.14.12"
   },

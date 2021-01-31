@@ -27,21 +27,6 @@ export default {
         rel: 'stylesheet',
       },
     ],
-    script: [
-      // jQuery. Only needed for snipcart
-      {
-        src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js',
-      },
-      // Snipcart js
-      {
-        src: 'https://cdn.snipcart.com/scripts/2.0/snipcart.js',
-        id: 'snipcart',
-        'data-autopop': 'false',
-        // Change me. Read more at http://snipcart.com
-        'data-api-key':
-          'ODRkNmJhZDktOTk5YS00Y2Y1LTk5Y2ItMTkzNTlkZTYxNzhmNjM2NTk1NTI2OTgyMTc1MTUy',
-      },
-    ],
   },
   /*
    ** Customize the progress bar color
@@ -58,7 +43,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ['@nuxtjs/sanity'],
+  buildModules: ['@nuxtjs/sanity', '@nuxtjs/snipcart'],
   /*
    ** Global CSS
    */
@@ -72,6 +57,14 @@ export default {
   sanity: {
     projectId: '5zj51uy1',
     minimal: true,
+  },
+
+  snipcart: {
+    // Options available
+
+    key:
+      'OWQ1NGI5ZTUtNDViYi00NTBhLWFkOTItOWIzMjM1YTRiNmY2NjM3NDc2NzY1OTA4MDY0NTA1',
+    /*    locales: {}, */
   },
   /*   generate: {
     routes: async function () {

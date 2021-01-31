@@ -15,7 +15,7 @@
         <a href="#" class="snipcart-checkout">
           <div class="snipcart-summary">
             🛒
-            <span class="snipcart-total-items" /> items
+            <span class="snipcart-items-count" /> items
             <span class="snipcart-total-price" />
           </div>
         </a>
@@ -59,28 +59,12 @@
 </template>
 
 <script>
-import AppLogo from "~/components/AppLogo.vue"
+import AppLogo from '~/components/AppLogo.vue'
 
 export default {
   components: {
-    AppLogo
+    AppLogo,
   },
-  mounted() {
-    if (!window.Snipcart) {
-      throw new Error(
-        "Snipcart not found. Make sure snipcart is loaded on page. For more info, see https://docs.snipcart.com/getting-started/installation"
-      )
-    }
-    const cart = this.$refs.cart
-    let timeoutId
-    window.Snipcart.subscribe("item.adding", () => {
-      cart.classList.add("pop")
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        cart.classList.remove("pop")
-      }, 220)
-    })
-  }
 }
 </script>
 
@@ -92,9 +76,9 @@ export default {
     grid-template-columns: 10em auto;
     grid-template-rows: 5em minmax(calc(100vh - 12rem), auto) 5em;
     grid-template-areas:
-      "header   header"
-      "sidebar  content"
-      "footer   footer";
+      'header   header'
+      'sidebar  content'
+      'footer   footer';
   }
 }
 
@@ -229,8 +213,8 @@ ul.categories :global(a) {
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
