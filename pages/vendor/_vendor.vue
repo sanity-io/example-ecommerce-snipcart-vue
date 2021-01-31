@@ -9,12 +9,8 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import blocksToHtml from "@sanity/block-content-to-html"
-import ImageViewer from "~/components/ImageViewer"
-import Price from "~/components/Price"
-import ProductList from "~/components/ProductList"
+import localize from '~/utils/localize'
+import blocksToHtml from '@sanity/block-content-to-html'
 
 const query = `
   *[_type == "vendor" && slug.current == $vendor] {
@@ -27,25 +23,20 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
+  asyncData({ $sanity }) {
+    return $sanity
       .fetch(query, context.route.params)
-      .then(data => ({
+      .then((data) => ({
         ...data,
         bodyHtml:
           data.description &&
           blocksToHtml({
             blocks: data.description,
             dataset: sanity.clientConfig.dataset,
-            projectId: sanity.clientConfig.projectId
-          })
+            projectId: sanity.clientConfig.projectId,
+          }),
       }))
-      .then(data => localize(data, ["nb", "en"]))
+      .then((data) => localize(data, ['nb', 'en']))
   },
-  components: {
-    ImageViewer,
-    Price,
-    ProductList
-  }
 }
 </script>

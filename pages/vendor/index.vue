@@ -1,9 +1,7 @@
 <template>
   <section>
     <div>
-      <h1 class="title">
-        Vendors
-      </h1>
+      <h1 class="title">Vendors</h1>
       <ul class="vendors">
         <li
           v-for="vendor in $store.state.globalData.vendors"
@@ -32,13 +30,7 @@
 </template>
 
 <script>
-import SanityImage from "~/components/SanityImage"
-
-export default {
-  components: {
-    SanityImage
-  }
-}
+export default {}
 </script>
 
 <style scoped>

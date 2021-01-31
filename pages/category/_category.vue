@@ -16,11 +16,7 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import ImageViewer from "~/components/ImageViewer"
-import Price from "~/components/Price"
-import ProductList from "~/components/ProductList"
+import localize from '~/utils/localize'
 
 const query = `
   *[_type == "category" && slug.current == $category] {
@@ -33,25 +29,20 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
-      .fetch(query, context.route.params)
-      .then(data => ({ category: localize(data) }))
+  asyncData({ $sanity, params }) {
+    return s$anity
+      .fetch(query, params)
+      .then((data) => ({ category: localize(data) }))
   },
-  components: {
-    ImageViewer,
-    Price,
-    ProductList
-  },
-  data: function() {
+  data() {
     return {
       category: {
         id: null,
         products: [],
-        categories: null
-      }
+        categories: null,
+      },
     }
-  }
+  },
 }
 </script>
 

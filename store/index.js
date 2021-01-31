@@ -1,5 +1,3 @@
-import sanity from '~/sanity.js'
-
 function isParentOf(category, possibleParent) {
   if (possibleParent._id === category._id) {
     return false
@@ -47,8 +45,8 @@ export const mutations = {
 
 export const actions = {
   // Asynchronous nuxtServerInit actions MUST RETURN a Promise to allow the nuxt server to wait on them.
-  nuxtServerInit({ commit }) {
-    return sanity
+  nuxtServerInit({ commit }, { $sanity }) {
+    return $sanity
       .fetch(query)
       .then((data) => {
         const categories = data.categories.map((category) =>

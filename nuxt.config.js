@@ -1,5 +1,3 @@
-import client from './sanity.js'
-
 export default {
   /*
    ** Nuxt target
@@ -53,6 +51,14 @@ export default {
    ** Load categories and vendors
    */
   plugins: [],
+  /** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: true,
+  /*
+   ** Nuxt.js dev-modules
+   */
+  buildModules: ['@nuxtjs/sanity'],
   /*
    ** Global CSS
    */
@@ -61,7 +67,13 @@ export default {
    ** Build configuration
    */
   build: {},
-  generate: {
+
+  // https://sanity.nuxtjs.org
+  sanity: {
+    projectId: '5zj51uy1',
+    minimal: true,
+  },
+  /*   generate: {
     routes: async function () {
       const paths = await client.fetch(`{
         "product": *[_type == "product"].slug.current,
@@ -76,5 +88,5 @@ export default {
         []
       )
     },
-  },
+  }, */
 }

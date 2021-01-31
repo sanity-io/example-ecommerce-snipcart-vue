@@ -49,13 +49,9 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import blocksToHtml from "@sanity/block-content-to-html"
-import ImageViewer from "~/components/ImageViewer"
-import SanityImage from "~/components/SanityImage"
-import Price from "~/components/Price"
-import numeral from "numeral"
+import localize from '~/utils/localize'
+import blocksToHtml from '@sanity/block-content-to-html'
+import numeral from 'numeral'
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
@@ -66,37 +62,32 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
-      .fetch(query, context.route.params)
-      .then(data => ({ product: localize(data) }))
+  asyncData({ $sanity, params }) {
+    return $sanity
+      .fetch(query, params)
+      .then((data) => ({ product: localize(data) }))
   },
-  components: {
-    SanityImage,
-    ImageViewer,
-    Price
-  },
-  data: function() {
+  data: function () {
     return {
-      blurb: "No blurb text to show",
-      body: false
+      blurb: 'No blurb text to show',
+      body: false,
     }
   },
   computed: {
-    formattedPrice: function() {
-      return numeral(this.product.defaultProductVariant.price).format("$0.00")
+    formattedPrice: function () {
+      return numeral(this.product.defaultProductVariant.price).format('$0.00')
     },
-    bodyHtml: function() {
+    bodyHtml: function () {
       if (!this.product || !this.product.body) {
-        return "…"
+        return '…'
       }
       return blocksToHtml({
         blocks: this.product.body,
         dataset: sanity.clientConfig.dataset,
-        projectId: sanity.clientConfig.projectId
+        projectId: sanity.clientConfig.projectId,
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

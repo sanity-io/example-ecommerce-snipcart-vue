@@ -60,30 +60,26 @@
 </template>
 
 <script>
-import SanityImage from "~/components/SanityImage"
-import lineClamp from "vue-line-clamp"
-import numeral from "numeral"
+import lineClamp from 'vue-line-clamp'
+import numeral from 'numeral'
 
 export default {
   directives: {
-    lineClamp
-  },
-  components: {
-    SanityImage
+    lineClamp,
   },
   props: {
     products: {
       type: Array,
-      required: true
+      required: true,
     },
     view: {
       type: String,
-      default: "grid"
-    }
+      default: 'grid',
+    },
   },
   data(context) {
     return {
-      displayView: context._props.view || "grid"
+      displayView: context._props.view || 'grid',
     }
   },
   methods: {
@@ -91,9 +87,9 @@ export default {
       this.displayView = view
     },
     getFormattedPrice(price) {
-      return numeral(price).format("$0.00")
-    }
-  }
+      return numeral(price).format('$0.00')
+    },
+  },
 }
 </script>
 

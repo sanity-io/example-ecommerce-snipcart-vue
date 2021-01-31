@@ -31,24 +31,19 @@
 </template>
 
 <script>
-import SanityImage from "./SanityImage"
-
 export default {
-  components: {
-    SanityImage
-  },
   props: {
-    images: { type: Array, required: true }
+    images: { type: Array, required: true },
   },
   data() {
     return {
       mainImageWidth: 500,
       imageWidth: 200,
-      activeImage: null
+      activeImage: null,
     }
   },
   computed: {
-    mainImage: () => this.images[0]
+    mainImage: () => this.images[0],
   },
   methods: {
     setActiveImage(image) {
@@ -56,8 +51,8 @@ export default {
     },
     close() {
       this.activeImage = null
-    }
-  }
+    },
+  },
 }
 </script>
 
