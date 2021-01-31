@@ -6,7 +6,7 @@
       </h1>
       <ul class="vendors">
         <li
-          v-for="vendor in this.$store.state.globalData.vendors"
+          v-for="vendor in $store.state.globalData.vendors"
           :key="vendor._id"
           class="vendor"
         >

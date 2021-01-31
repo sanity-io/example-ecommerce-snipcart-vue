@@ -25,7 +25,7 @@
     <section class="sidebar">
       <ul class="categories">
         <li
-          v-for="category in this.$store.state.globalData.categoryTree"
+          v-for="category in $store.state.globalData.categoryTree"
           v-if="category.slug"
           :key="category._id"
           class="category"

@@ -6,7 +6,7 @@
       </h1>
       <ul class="categories">
         <li
-          v-for="category in this.$store.state.globalData.categories"
+          v-for="category in $store.state.globalData.categories"
           :key="category._id"
         >
           <router-link

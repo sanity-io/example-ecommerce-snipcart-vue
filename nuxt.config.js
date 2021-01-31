@@ -47,7 +47,7 @@ export default {
   /*
    ** Load categories and vendors
    */
-  plugins: ["~/plugins/globalData"],
+  plugins: [],
   /*
    ** Global CSS
    */

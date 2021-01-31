@@ -1,10 +1,10 @@
-const sanityClient = require("@sanity/client")
+import sanityClient from "@sanity/client"
 
-module.exports = sanityClient({
+export default sanityClient({
   // Find your project ID and dataset in `sanity.json` in your studio project or on https://manage.sanity.io
   projectId: "5zj51uy1",
   dataset: "production",
-  useCdn: true
+  useCdn: true,
   // useCdn == true gives fast, cheap responses using a globally distributed cache.
   // Set this to false if your application require the freshest possible
   // data always (potentially slightly slower and a bit more expensive).
