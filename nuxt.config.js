@@ -55,25 +55,7 @@ export default {
   /*
    ** Build configuration
    */
-  build: {
-    /*
-     ** postcss
-     */
-    postcss: [require("postcss-cssnext")()],
-    /*
-     ** Run ESLint on save
-     */
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        })
-      }
-    }
-  },
+  build: {},
   generate: {
     routes: async function() {
       const paths = await client.fetch(`{

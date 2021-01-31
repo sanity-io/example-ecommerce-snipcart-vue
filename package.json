@@ -19,8 +19,6 @@
     "@sanity/image-url": "^0.140.19",
     "numeral": "^2.0.6",
     "nuxt": "^2.14.12",
-    "postcss": "^8.2.4",
-    "postcss-cssnext": "^3.1.0",
     "vue-line-clamp": "^1.3.2"
   },
   "devDependencies": {
