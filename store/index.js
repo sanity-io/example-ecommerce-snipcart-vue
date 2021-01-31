@@ -1,4 +1,4 @@
-import sanity from "~/sanity.js"
+import sanity from '~/sanity.js'
 
 function isParentOf(category, possibleParent) {
   if (possibleParent._id === category._id) {
@@ -40,21 +40,25 @@ export const state = () => ({
 })
 
 export const mutations = {
-  setGlobalData(state, value) {
-    state.globalData = value
+  setGlobalData(state, data) {
+    state.globalData = data
   },
 }
 
 export const actions = {
-  async nuxtServerInit({ commit }) {
-    sanity.fetch(query).then((data) => {
-      const categories = data.categories.map((category) =>
-        attachCategories(category, data.categories)
-      )
-      data.categoryTree = categories.filter(
-        (category) => (category.parents || []).length === 0
-      )
-      commit("setGlobalData", data)
-    })
+  // Asynchronous nuxtServerInit actions MUST RETURN a Promise to allow the nuxt server to wait on them.
+  nuxtServerInit({ commit }) {
+    return sanity
+      .fetch(query)
+      .then((data) => {
+        const categories = data.categories.map((category) =>
+          attachCategories(category, data.categories)
+        )
+        data.categoryTree = categories.filter(
+          (category) => (category.parents || []).length === 0
+        )
+        commit('setGlobalData', data)
+      })
+      .catch((error) => console.error(error))
   },
 }
