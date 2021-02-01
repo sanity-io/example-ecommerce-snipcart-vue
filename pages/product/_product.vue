@@ -40,9 +40,9 @@
           </div>
         </div>
         <SanityContent
+          v-if="product.body"
           class="body"
           :blocks="product.body"
-          v-if="product.body"
         />
       </div>
       <div class="sidebar">
@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import localize from '~/utils/localize'
 import numeral from 'numeral'
+import localize from '~/utils/localize'
 
 const query = `
   *[_type == "product" && slug.current == $product][0] {
@@ -69,7 +69,8 @@ const query = `
 
 export default {
   name: 'Product',
-  asyncData({ $sanity, params }) {
+  asyncData({ $sanity, params, payload }) {
+    if (payload) return { product: localize(payload) }
     return $sanity
       .fetch(query, params)
       .then((data) => ({ product: localize(data) }))
@@ -81,7 +82,7 @@ export default {
     }
   },
   computed: {
-    formattedPrice: function () {
+    formattedPrice() {
       return numeral(this.product.defaultProductVariant.price).format('$0.00')
     },
   },

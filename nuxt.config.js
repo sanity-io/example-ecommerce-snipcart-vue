@@ -1,9 +1,15 @@
+import fetch from 'node-fetch'
 import { createClient } from '@nuxtjs/sanity'
+
+if (!globalThis.fetch) {
+  globalThis.fetch = fetch
+}
 
 const configSanity = {
   projectId: '5zj51uy1',
   minimal: true,
   useCdn: false,
+  dataset: 'production',
 }
 
 const client = createClient(configSanity)
@@ -51,7 +57,7 @@ export default {
    */
   css: ['~/css/global.css'],
   /*
-  
+
    ** Build configuration
    */
   build: {},
@@ -65,13 +71,14 @@ export default {
   },
   generate: {
     fallback: true,
-    crawler: true,
-    /*   async routes() {
+    crawler: false,
+    async routes() {
       const paths = await client.fetch(`{
         "product": *[_type == "product"].slug.current,
         "category": *[_type == "category"].slug.current,
         "vendor": *[_type == "vendor"].slug.current
       }`)
+
       return Object.keys(paths).reduce(
         (acc, key) => [
           ...acc,
@@ -79,6 +86,6 @@ export default {
         ],
         []
       )
-    }, */
+    },
   },
 }

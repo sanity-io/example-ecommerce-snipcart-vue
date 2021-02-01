@@ -12,9 +12,9 @@ export default {
   props: {
     price: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
