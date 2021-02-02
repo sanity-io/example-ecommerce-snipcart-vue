@@ -140,6 +140,7 @@ nav {
 }
 
 nav > ul {
+  list-style-type: none;
   display: flex;
   align-items: center;
   margin: 0;
