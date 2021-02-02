@@ -1,19 +1,3 @@
-import fetch from 'node-fetch'
-import { createClient } from '@nuxtjs/sanity'
-
-if (!globalThis.fetch) {
-  globalThis.fetch = fetch
-}
-
-const configSanity = {
-  projectId: '5zj51uy1',
-  minimal: true,
-  useCdn: false,
-  dataset: 'production',
-}
-
-const client = createClient(configSanity)
-
 export default {
   /*
    ** Nuxt target
@@ -63,7 +47,12 @@ export default {
   build: {},
 
   // https://sanity.nuxtjs.org
-  sanity: configSanity,
+  sanity: {
+    projectId: '5zj51uy1',
+    minimal: true,
+    useCdn: false,
+    dataset: 'production',
+  },
 
   snipcart: {
     key:
@@ -71,21 +60,6 @@ export default {
   },
   generate: {
     fallback: true,
-    crawler: false,
-    async routes() {
-      const paths = await client.fetch(`{
-        "product": *[_type == "product"].slug.current,
-        "category": *[_type == "category"].slug.current,
-        "vendor": *[_type == "vendor"].slug.current
-      }`)
-
-      return Object.keys(paths).reduce(
-        (acc, key) => [
-          ...acc,
-          ...paths[key].reduce((acc, curr) => [...acc, `${key}/${curr}`], []),
-        ],
-        []
-      )
-    },
+    crawler: true,
   },
 }

@@ -1,9 +1,7 @@
 <template>
   <section>
     <div>
-      <h1 class="title">
-        Categories
-      </h1>
+      <h1 class="title">Categories</h1>
       <ul class="categories">
         <li
           v-for="category in $store.state.globalData.categories"
