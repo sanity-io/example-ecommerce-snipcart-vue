@@ -60,8 +60,6 @@
 </template>
 
 <script>
-import numeral from 'numeral'
-
 export default {
   props: {
     products: {
@@ -83,7 +81,10 @@ export default {
       this.displayView = view
     },
     getFormattedPrice(price) {
-      return numeral(price).format('$0.00')
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price)
     },
   },
 }

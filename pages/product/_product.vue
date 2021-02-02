@@ -56,7 +56,6 @@
 </template>
 
 <script>
-import numeral from 'numeral'
 import localize from '~/utils/localize'
 
 const query = `
@@ -69,8 +68,7 @@ const query = `
 
 export default {
   name: 'Product',
-  asyncData({ $sanity, params, payload }) {
-    if (payload) return { product: localize(payload) }
+  asyncData({ $sanity, params }) {
     return $sanity
       .fetch(query, params)
       .then((data) => ({ product: localize(data) }))
@@ -83,7 +81,10 @@ export default {
   },
   computed: {
     formattedPrice() {
-      return numeral(this.product.defaultProductVariant.price).format('$0.00')
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(this.product.defaultProductVariant.price)
     },
   },
 }

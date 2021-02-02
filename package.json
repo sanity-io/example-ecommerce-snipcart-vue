@@ -14,9 +14,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/sanity": "^0.6.2",
+    "@nuxtjs/sanity": "^0.7.0",
     "@nuxtjs/snipcart": "^1.1.1",
-    "numeral": "^2.0.6",
     "nuxt": "^2.14.12"
   },
   "devDependencies": {

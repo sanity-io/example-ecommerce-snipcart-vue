@@ -1223,10 +1223,10 @@
     consola "^2.15.0"
     eslint-webpack-plugin "^2.4.1"
 
-"@nuxtjs/sanity@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/sanity/-/sanity-0.6.2.tgz#fb2af61254fc9429cda8f28c93f6faa13655d1bb"
-  integrity sha512-d/EgtWJRINl3pZHlShCZ81vJGTmwulIN0wccoRFqoo/lk3evX07JJA+lZQKpNmOxjexFHrhwi+V8u3aBPI3UbA==
+"@nuxtjs/sanity@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/sanity/-/sanity-0.7.0.tgz#8fe4a05f0b72614e0a9088b38e8881a32ca70ea0"
+  integrity sha512-5l3TeMeGDk0vsAyhxSRElGz9h1OPT+JgrK2zyYh5XoUrmxWMwZoLTwiUVHCYmeWdfnKAjFYvPsM1LAfzJRJiMA==
   dependencies:
     defu "3.2.2"
     upath "^2.0.1"
@@ -5641,11 +5641,6 @@ num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
   integrity sha1-b2gragJ6Tp3fpFZM0lidHU5mnt4=
-
-numeral@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/numeral/-/numeral-2.0.6.tgz#4ad080936d443c2561aed9f2197efffe25f4e506"
-  integrity sha1-StCAk21EPCVhrtnyGX7//iX05QY=
 
 nuxt@^2.14.12:
   version "2.14.12"
