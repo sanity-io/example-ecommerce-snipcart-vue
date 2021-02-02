@@ -48,15 +48,14 @@ export default {
 
   // https://sanity.nuxtjs.org
   sanity: {
-    projectId: '5zj51uy1',
+    projectId: 'xxxxxxxxx',
     minimal: true,
     useCdn: false,
     dataset: 'production',
   },
 
   snipcart: {
-    key:
-      'OWQ1NGI5ZTUtNDViYi00NTBhLWFkOTItOWIzMjM1YTRiNmY2NjM3NDc2NzY1OTA4MDY0NTA1',
+    key: 'xxxxxxxxx',
   },
   generate: {
     fallback: true,
