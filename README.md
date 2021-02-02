@@ -57,7 +57,7 @@ $ yarn start
 This project is built in the [Nuxt Full Static mode](https://nuxtjs.org/blog/going-full-static/), using the Nuxt crawler to detect every relative link and generat it.
 It means that, in production, the website won't make any API call to Sanity. However, it will make an API call for every pages during build time. And those calls aren't made to the CDN because we always want to have the freshest data when content editors trigger a rebuid.
 
-This approach is fine for websites with not too many pages. If your datastore contains 5000 products, then you'd better turn off the crawler and fetch all routes with a single API request:
+This approach is fine for websites with not too many pages. If the datastore contains a lot of products, then it's better turn off the crawler and fetch all routes with a single API request:
 
 ```js
 // nuxt.config.js
@@ -97,6 +97,17 @@ const client = createClient({
   useCdn: false,
   dataset: 'production',
 })
+```
+
+And don't forget to return the payload and thus prevent the API calls in your pages:
+
+```js
+ asyncData({ $sanity, params, payload }) {
+    if(payload) return { product: localize(data) }
+    return $sanity
+      .fetch(query, params)
+      .then((data) => ({ product: localize(data) }))
+  },
 ```
 
 ## Note on GROQ query default limit
