@@ -19,7 +19,7 @@ $ yarn dev
 Tips:
 
 - Make sure you are running on http://localhost:3000. If not sanity and snipcart will fail due to CORS origins.
-- Nuxt.js requires a recent Node version (≥ 12) so if it fails on startup you might need an upgrade.
+- This project requires a recent Node version 12 or later, so if it fails on startup you might need an upgrade.
 
 ## Using your own backend data (Sanity Studio)
 
