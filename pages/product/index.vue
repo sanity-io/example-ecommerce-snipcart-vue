@@ -1,12 +1,7 @@
 <template>
   <section>
-    <div>
-      <h1 class="title">Products</h1>
-      <div v-show="products">
-        <h3>Products</h3>
-        <ProductList :products="products" />
-      </div>
-    </div>
+    <h1 class="title">Products</h1>
+    <ProductList :products="products" />
   </section>
 </template>
 

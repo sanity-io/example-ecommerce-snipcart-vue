@@ -2,13 +2,13 @@
   <section :key="category.id" class="container">
     <div>
       <h1 class="title">{{ category.title }}</h1>
-      <div class="description">{{ category.description }}</div>
+      <p class="description">{{ category.description }}</p>
       <ProductList v-if="category.products" :products="category.products" />
       <ul v-if="category.categories" class="sub-categories">
         <li v-for="subCat in category.categories" :key="subCat._id">
-          <router-link :to="'/category/' + subCat.slug.current">
+          <NuxtLink :to="'/category/' + subCat.slug.current">
             {{ subCat.title }}
-          </router-link>
+          </NuxtLink>
         </li>
       </ul>
     </div>

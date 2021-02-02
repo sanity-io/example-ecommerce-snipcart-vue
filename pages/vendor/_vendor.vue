@@ -1,14 +1,12 @@
 <template>
   <section class="container">
-    <div>
-      <h1 class="title">{{ title }}</h1>
-      <SanityContent
-        v-if="description"
-        class="body blockContent"
-        :blocks="description"
-      ></SanityContent>
-      <ProductList v-if="products" :products="products" />
-    </div>
+    <h1 class="title">{{ title }}</h1>
+    <SanityContent
+      v-if="description"
+      class="body blockContent"
+      :blocks="description"
+    ></SanityContent>
+    <ProductList :products="products" />
   </section>
 </template>
 

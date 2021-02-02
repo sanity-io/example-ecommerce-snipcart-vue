@@ -2,21 +2,18 @@
   <section :key="product._id">
     <ul class="categories">
       <li>
-        <router-link
-          :to="'/vendor/' + product.vendor.slug.current"
-          class="vendor"
-        >
+        <NuxtLink :to="'/vendor/' + product.vendor.slug.current" class="vendor">
           <SanityImage
             :asset-id="product.vendor.logo.asset._ref"
             class="vendorLogo"
           />
-        </router-link>
+        </NuxtLink>
         {{ product.vendor.title }}
       </li>
       <li v-for="category in product.categories" :key="category._id">
-        <router-link :to="'/category/' + category.slug.current">
+        <NuxtLink :to="'/category/' + category.slug.current">
           {{ category.title }}
-        </router-link>
+        </NuxtLink>
       </li>
     </ul>
 
@@ -72,12 +69,6 @@ export default {
     return $sanity
       .fetch(query, params)
       .then((data) => ({ product: localize(data) }))
-  },
-  data() {
-    return {
-      blurb: 'No blurb text to show',
-      body: false,
-    }
   },
   computed: {
     formattedPrice() {

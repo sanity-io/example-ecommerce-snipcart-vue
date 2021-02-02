@@ -1,31 +1,29 @@
 <template>
   <section>
-    <div>
-      <h1 class="title">Vendors</h1>
-      <ul class="vendors">
-        <li
-          v-for="vendor in $store.state.globalData.vendors"
-          :key="vendor._id"
-          class="vendor"
+    <h1 class="title">Vendors</h1>
+    <ul class="vendors">
+      <li
+        v-for="vendor in $store.state.globalData.vendors"
+        :key="vendor._id"
+        class="vendor"
+      >
+        <NuxtLink
+          v-if="vendor.slug"
+          :to="'/vendor/' + vendor.slug.current"
+          class="link"
         >
-          <router-link
-            v-if="vendor.slug"
-            :to="'/vendor/' + vendor.slug.current"
-            class="link"
-          >
-            <!--    <SanityImage
-              v-if="vendor.logo"
-              :image="vendor.logo"
-              class="image"
-            /> -->
-            <div class="meta">
-              <span class="vendorTitle">{{ vendor.title }}</span>
-              &nbsp;<span class="qty">({{ vendor.productQty }})</span>
-            </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
+          <SanityImage
+            v-if="vendor.logo"
+            :asset-id="vendor.logo.asset._ref"
+            class="image"
+          />
+          <div class="meta">
+            <span class="vendorTitle">{{ vendor.title }} </span
+            ><span class="qty">({{ vendor.productQty }})</span>
+          </div>
+        </NuxtLink>
+      </li>
+    </ul>
   </section>
 </template>
 
