@@ -1,6 +1,6 @@
 # The Transglobal Candy Store
 
-A frontend example in Vue.js and Nuxt.js for the Sanity.io e-commerce schema
+A frontend example in [Vue.js](https://vuejs.org/) and [Nuxt.js](https://nuxtjs.org) for the Sanity.io e-commerce schema
 
 🔗 [Read the blog post](https://www.sanity.io/blog/e-commerce-vue-nuxt-snipcart)
 
@@ -52,10 +52,53 @@ $ yarn generate
 $ yarn start
 ```
 
-## Hosting on Netlify
+## Note on Nuxt crawler
 
-If you want to host this on Netlify, as a static build, follow [these steps](https://www.sanity.io/blog/tutorial-host-your-sanity-based-next-js-project-on-netlify#3-deploy-your-blog-on-netlify) while switching out the `generate` command above and changing the output directory from `out` to `dist`. Note: Nuxt is intended to run as a universal/isomorphic app and will make calls to the Sanity CDN.
+This project is built in the [Nuxt Full Static mode](https://nuxtjs.org/blog/going-full-static/), using the Nuxt crawler to detect every relative link and generat it.
+It means that, in production, the website won't make any API call to Sanity. However, it will make an API call for every pages during build time. And those calls aren't made to the CDN because we always want to have the freshest data when content editors trigger a rebuid.
+
+This approach is fine for websites with not too many pages. If your datastore contains 5000 products, then you'd better turn off the crawler and fetch all routes with a single API request:
+
+```js
+// nuxt.config.js
+generate: {
+  fallback: true,
+  crawler: false,
+  async routes() {
+      const paths = await client.fetch(`{
+        "product": *[_type == "product"].slug.current,
+        "category": *[_type == "category"].slug.current,
+        "vendor": *[_type == "vendor"].slug.current
+      }`)
+      return Object.keys(paths).reduce(
+        (acc, key) => [
+          ...acc,
+          ...paths[key].reduce((acc, curr) => [...acc, `${key}/${curr}`], []),
+        ],
+        []
+      )
+    },
+},
+```
+
+Note that this project is using a lightweight version of the `@sanity/client`, which uses the Fetch API and thus only works in the browser. Since the routes generation is done in the Node runtime, we need to either patch the global object in Node or use the `@sanity/client`.
+
+```js
+// nuxt.config.js
+import { createClient } from '@nuxtjs/sanity'
+import fetch from 'node-fetch'
+if (!globalThis.fetch) {
+  globalThis.fetch = fetch
+}
+
+const client = createClient({
+  projectId: 'xxxxxx',
+  minimal: true,
+  useCdn: false,
+  dataset: 'production',
+})
+```
+
+## Note on GROQ query default limit
 
 The queries are by default limited to 100 items. This project is just an example, but it is possible to expand it with pagination or forever-scroll. To get more items, just add ex [0..1000] to the end of your query https://www.sanity.io/docs/data-store/query-cheat-sheet#slice-operations
-
-For detailed explanations on how Nuxt.js work, checkout the [Nuxt.js docs](https://nuxtjs.org).
