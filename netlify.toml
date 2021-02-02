@@ -1,0 +1,5 @@
+[build]
+  # This is the directory that you are publishing from
+  publish = "dist"
+  # This will be your default build command
+  command = "yarn generate"
