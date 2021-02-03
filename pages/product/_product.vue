@@ -28,9 +28,9 @@
               :data-item-name="product.title"
               :data-item-price="product.defaultProductVariant.price"
               :data-item-id="product._id"
+              :data-item-url="'/product/' + product.slug.current"
               type="button"
               class="snipcart-add-item"
-              data-item-url="/"
             >
               Add to cart
             </button>
