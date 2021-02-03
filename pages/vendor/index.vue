@@ -1,44 +1,34 @@
 <template>
   <section>
-    <div>
-      <h1 class="title">
-        Vendors
-      </h1>
-      <ul class="vendors">
-        <li
-          v-for="vendor in this.$store.state.globalData.vendors"
-          :key="vendor._id"
-          class="vendor"
+    <h1 class="title">Vendors</h1>
+    <ul class="vendors">
+      <li
+        v-for="vendor in $store.state.globalData.vendors"
+        :key="vendor._id"
+        class="vendor"
+      >
+        <NuxtLink
+          v-if="vendor.slug"
+          :to="'/vendor/' + vendor.slug.current"
+          class="link"
         >
-          <router-link
-            v-if="vendor.slug"
-            :to="'/vendor/' + vendor.slug.current"
-            class="link"
-          >
-            <SanityImage
-              v-if="vendor.logo"
-              :image="vendor.logo"
-              class="image"
-            />
-            <div class="meta">
-              <span class="vendorTitle">{{ vendor.title }}</span>
-              &nbsp;<span class="qty">({{ vendor.productQty }})</span>
-            </div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
+          <img
+            v-if="vendor.logo"
+            :src="$urlFor(vendor.logo).size(180, 80)"
+            class="image"
+          />
+          <div class="meta">
+            <span class="vendorTitle">{{ vendor.title }} </span
+            ><span class="qty">({{ vendor.productQty }})</span>
+          </div>
+        </NuxtLink>
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-import SanityImage from "~/components/SanityImage"
-
-export default {
-  components: {
-    SanityImage
-  }
-}
+export default {}
 </script>
 
 <style scoped>

@@ -24,18 +24,19 @@
     </div>
     <ul v-if="products.length > 0" :class="displayView">
       <li v-for="product in products" :key="product._id" class="product">
-        <router-link :to="'/product/' + product.slug.current" class="link">
-          <SanityImage
+        <NuxtLink :to="'/product/' + product.slug.current" class="link">
+          <img
             v-if="product.defaultProductVariant.images[0]"
-            :image="product.defaultProductVariant.images[0]"
+            :src="$urlFor(product.defaultProductVariant.images[0]).size(300)"
             :alt="product.title"
             :width="displayView === 'grid' ? 300 : 50"
             class="image"
+            loading="lazy"
           />
 
-          <div class="title">{{ product.title }}</div>
+          <h3 class="title">{{ product.title }}</h3>
           <p v-if="displayView === 'grid'" class="blurb">{{ product.blurb }}</p>
-        </router-link>
+        </NuxtLink>
 
         <div class="price-and-button">
           <span class="price">{{
@@ -47,9 +48,12 @@
             :data-item-name="product.title"
             :data-item-price="product.defaultProductVariant.price"
             :data-item-id="product._id"
+            :data-item-url="'/product/' + product.slug.current"
+            :data-item-image="
+              $urlFor(product.defaultProductVariant.images[0]).size(120)
+            "
             type="button"
             class="snipcart-add-item"
-            data-item-url="/"
           >
             Add to cart
           </button>
@@ -60,30 +64,21 @@
 </template>
 
 <script>
-import SanityImage from "~/components/SanityImage"
-import lineClamp from "vue-line-clamp"
-import numeral from "numeral"
-
 export default {
-  directives: {
-    lineClamp
-  },
-  components: {
-    SanityImage
-  },
   props: {
     products: {
       type: Array,
-      required: true
+      required: true,
+      default: () => [],
     },
     view: {
       type: String,
-      default: "grid"
-    }
+      default: 'grid',
+    },
   },
-  data(context) {
+  data() {
     return {
-      displayView: context._props.view || "grid"
+      displayView: this.view,
     }
   },
   methods: {
@@ -91,9 +86,12 @@ export default {
       this.displayView = view
     },
     getFormattedPrice(price) {
-      return numeral(price).format("$0.00")
-    }
-  }
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price)
+    },
+  },
 }
 </script>
 

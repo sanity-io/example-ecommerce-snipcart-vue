@@ -2,13 +2,13 @@
   <section :key="category.id" class="container">
     <div>
       <h1 class="title">{{ category.title }}</h1>
-      <div class="description">{{ category.description }}</div>
+      <p class="description">{{ category.description }}</p>
       <ProductList v-if="category.products" :products="category.products" />
       <ul v-if="category.categories" class="sub-categories">
         <li v-for="subCat in category.categories" :key="subCat._id">
-          <router-link :to="'/category/' + subCat.slug.current">
+          <NuxtLink :to="'/category/' + subCat.slug.current">
             {{ subCat.title }}
-          </router-link>
+          </NuxtLink>
         </li>
       </ul>
     </div>
@@ -16,11 +16,7 @@
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import ImageViewer from "~/components/ImageViewer"
-import Price from "~/components/Price"
-import ProductList from "~/components/ProductList"
+import localize from '~/utils/localize'
 
 const query = `
   *[_type == "category" && slug.current == $category] {
@@ -33,25 +29,20 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
-      .fetch(query, context.route.params)
-      .then(data => ({ category: localize(data) }))
+  asyncData({ $sanity, params }) {
+    return $sanity
+      .fetch(query, params)
+      .then((data) => ({ category: localize(data) }))
   },
-  components: {
-    ImageViewer,
-    Price,
-    ProductList
-  },
-  data: function() {
+  data() {
     return {
       category: {
         id: null,
         products: [],
-        categories: null
-      }
+        categories: null,
+      },
     }
-  }
+  },
 }
 </script>
 

@@ -1,87 +1,71 @@
 <template>
   <div class="root">
     <header>
-      <router-link :to="'/'" class="logo">
+      <NuxtLink :to="'/'" class="logo">
         <AppLogo />
-      </router-link>
+      </NuxtLink>
       <nav>
         <ul>
-          <li><router-link :to="'/'">Home</router-link></li>
-          <li><router-link :to="'/category'">Categories</router-link></li>
-          <li><router-link :to="'/vendor'">Vendors</router-link></li>
+          <li><NuxtLink :to="'/'">Home</NuxtLink></li>
+          <li><NuxtLink :to="'/category'">Categories</NuxtLink></li>
+          <li><NuxtLink :to="'/vendor'">Vendors</NuxtLink></li>
         </ul>
       </nav>
-      <div ref="cart" class="cart">
+      <div class="cart">
         <a href="#" class="snipcart-checkout">
           <div class="snipcart-summary">
             🛒
-            <span class="snipcart-total-items" /> items
+            <span class="snipcart-items-count" /> items
             <span class="snipcart-total-price" />
           </div>
         </a>
       </div>
     </header>
 
-    <section class="sidebar">
-      <ul class="categories">
-        <li
-          v-for="category in this.$store.state.globalData.categoryTree"
-          v-if="category.slug"
-          :key="category._id"
-          class="category"
-        >
-          <router-link :to="'/category/' + category.slug.current">
-            {{ category.title }}
-          </router-link>
-          <ul v-if="category.children" class="sub-categories">
-            <li
-              v-for="subCategory in category.children"
-              v-if="subCategory.slug"
-              :key="category._id + subCategory._id"
+    <aside class="sidebar">
+      <nav>
+        <ul class="categories">
+          <li
+            v-for="category in $store.state.globalData.categoryTree"
+            :key="category._id"
+            class="category"
+          >
+            <NuxtLink
+              v-if="category.slug"
+              :to="'/category/' + category.slug.current"
             >
-              <router-link :to="'/category/' + subCategory.slug.current">
-                {{ subCategory.title }}
-              </router-link>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
+              {{ category.title }}
+            </NuxtLink>
+            <ul v-if="category.children" class="sub-categories">
+              <li
+                v-for="subCategory in category.children"
+                :key="category._id + subCategory._id"
+              >
+                <NuxtLink
+                  v-if="subCategory.slug"
+                  :to="'/category/' + subCategory.slug.current"
+                >
+                  {{ subCategory.title }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
 
-    <section class="content">
+    <main class="content">
       <nuxt />
-    </section>
+    </main>
 
-    <div class="footer">
+    <footer class="footer">
       A Sanity E-commerce example frontend in vue.js / nuxt.js
-    </div>
+    </footer>
   </div>
 </template>
 
 <script>
-import AppLogo from "~/components/AppLogo.vue"
-
-export default {
-  components: {
-    AppLogo
-  },
-  mounted() {
-    if (!window.Snipcart) {
-      throw new Error(
-        "Snipcart not found. Make sure snipcart is loaded on page. For more info, see https://docs.snipcart.com/getting-started/installation"
-      )
-    }
-    const cart = this.$refs.cart
-    let timeoutId
-    window.Snipcart.subscribe("item.adding", () => {
-      cart.classList.add("pop")
-      clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => {
-        cart.classList.remove("pop")
-      }, 220)
-    })
-  }
-}
+export default {}
 </script>
 
 <style scoped>
@@ -92,9 +76,9 @@ export default {
     grid-template-columns: 10em auto;
     grid-template-rows: 5em minmax(calc(100vh - 12rem), auto) 5em;
     grid-template-areas:
-      "header   header"
-      "sidebar  content"
-      "footer   footer";
+      'header   header'
+      'sidebar  content'
+      'footer   footer';
   }
 }
 
@@ -156,6 +140,7 @@ nav {
 }
 
 nav > ul {
+  list-style-type: none;
   display: flex;
   align-items: center;
   margin: 0;
@@ -229,8 +214,8 @@ ul.categories :global(a) {
 
 <style>
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

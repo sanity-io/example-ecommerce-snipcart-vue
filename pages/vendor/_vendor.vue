@@ -1,20 +1,17 @@
 <template>
   <section class="container">
-    <div>
-      <h1 class="title">{{ title }}</h1>
-      <div class="body blockContent" v-html="bodyHtml" />
-      <ProductList v-if="products" :products="products" />
-    </div>
+    <h1 class="title">{{ title }}</h1>
+    <SanityContent
+      v-if="description"
+      class="body blockContent"
+      :blocks="description"
+    ></SanityContent>
+    <ProductList :products="products" />
   </section>
 </template>
 
 <script>
-import sanity from "~/sanity.js"
-import localize from "~/utils/localize"
-import blocksToHtml from "@sanity/block-content-to-html"
-import ImageViewer from "~/components/ImageViewer"
-import Price from "~/components/Price"
-import ProductList from "~/components/ProductList"
+import localize from '~/utils/localize'
 
 const query = `
   *[_type == "vendor" && slug.current == $vendor] {
@@ -27,25 +24,12 @@ const query = `
 `
 
 export default {
-  asyncData(context) {
-    return sanity
-      .fetch(query, context.route.params)
-      .then(data => ({
-        ...data,
-        bodyHtml:
-          data.description &&
-          blocksToHtml({
-            blocks: data.description,
-            dataset: sanity.clientConfig.dataset,
-            projectId: sanity.clientConfig.projectId
-          })
-      }))
-      .then(data => localize(data, ["nb", "en"]))
+  name: 'Vendor',
+  asyncData({ $sanity, params }) {
+    return $sanity
+      .fetch(query, params)
+      .then((data) => data)
+      .then((data) => localize(data, ['nb', 'en']))
   },
-  components: {
-    ImageViewer,
-    Price,
-    ProductList
-  }
 }
 </script>

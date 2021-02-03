@@ -1,23 +1,21 @@
 <template>
   <section>
-    <div>
-      <h1 class="title">
-        Categories
-      </h1>
+    <nav>
+      <h1 class="title">Categories</h1>
       <ul class="categories">
         <li
-          v-for="category in this.$store.state.globalData.categories"
+          v-for="category in $store.state.globalData.categories"
           :key="category._id"
         >
-          <router-link
+          <NuxtLink
             v-if="category.slug"
             :to="'/category/' + category.slug.current"
           >
             {{ category.title }}
-          </router-link>
+          </NuxtLink>
         </li>
       </ul>
-    </div>
+    </nav>
   </section>
 </template>
 
