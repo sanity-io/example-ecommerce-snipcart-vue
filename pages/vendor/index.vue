@@ -12,9 +12,9 @@
           :to="'/vendor/' + vendor.slug.current"
           class="link"
         >
-          <SanityImage
+          <img
             v-if="vendor.logo"
-            :asset-id="vendor.logo.asset._ref"
+            :src="$urlFor(vendor.logo).size(180, 80)"
             class="image"
           />
           <div class="meta">

@@ -1,9 +1,10 @@
 <template>
   <div class="root">
     <div style="cursor: pointer" @click="setActiveImage(images[0])">
-      <SanityImage
-        :asset-id="images[0].asset._ref"
-        :width="mainImageWidth"
+      <img
+        :src="$urlFor(images[0]).size(500)"
+        width="500"
+        height="500"
         class="mainImage"
       />
     </div>
@@ -14,11 +15,7 @@
         class="item"
         @click="setActiveImage(image)"
       >
-        <SanityImage
-          :asset-id="image.asset._ref"
-          :width="imageWidth"
-          class="image"
-        />
+        <img :src="$urlFor(image).size(200)" width="200" class="image" />
       </li>
     </ul>
 
@@ -29,11 +26,7 @@
           points="96,14 82,0 48,34 14,0 0,14 34,48 0,82 14,96 48,62 82,96 96,82 62,48 "
         />
       </svg>
-      <SanityImage
-        :asset-id="activeImage.asset._ref"
-        class="image"
-        width="1000"
-      />
+      <img :src="$urlFor(activeImage).size(1000)" class="image" width="1000" />
     </div>
   </div>
 </template>
@@ -45,13 +38,8 @@ export default {
   },
   data() {
     return {
-      mainImageWidth: 500,
-      imageWidth: 200,
       activeImage: null,
     }
-  },
-  computed: {
-    mainImage: () => this.images[0],
   },
   methods: {
     setActiveImage(image) {

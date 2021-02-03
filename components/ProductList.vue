@@ -25,12 +25,13 @@
     <ul v-if="products.length > 0" :class="displayView">
       <li v-for="product in products" :key="product._id" class="product">
         <NuxtLink :to="'/product/' + product.slug.current" class="link">
-          <SanityImage
+          <img
             v-if="product.defaultProductVariant.images[0]"
-            :asset-id="product.defaultProductVariant.images[0].asset._ref"
+            :src="$urlFor(product.defaultProductVariant.images[0]).size(300)"
             :alt="product.title"
             :width="displayView === 'grid' ? 300 : 50"
             class="image"
+            loading="lazy"
           />
 
           <h3 class="title">{{ product.title }}</h3>
@@ -48,6 +49,9 @@
             :data-item-price="product.defaultProductVariant.price"
             :data-item-id="product._id"
             :data-item-url="'/product/' + product.slug.current"
+            :data-item-image="
+              $urlFor(product.defaultProductVariant.images[0]).size(120)
+            "
             type="button"
             class="snipcart-add-item"
           >

@@ -30,7 +30,7 @@ export default {
   /*
    ** Load categories and vendors
    */
-  plugins: [],
+  plugins: ['~/plugins/sanity-image-builder'],
   /** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
    */

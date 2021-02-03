@@ -16,6 +16,7 @@
   "dependencies": {
     "@nuxtjs/sanity": "^0.7.0",
     "@nuxtjs/snipcart": "^1.1.1",
+    "@sanity/image-url": "^0.140.19",
     "nuxt": "^2.14.12"
   },
   "devDependencies": {

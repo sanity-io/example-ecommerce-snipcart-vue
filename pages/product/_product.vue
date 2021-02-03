@@ -3,10 +3,7 @@
     <ul class="categories">
       <li>
         <NuxtLink :to="'/vendor/' + product.vendor.slug.current" class="vendor">
-          <SanityImage
-            :asset-id="product.vendor.logo.asset._ref"
-            class="vendorLogo"
-          />
+          <img :src="$urlFor(product.vendor.logo)" class="vendorLogo" />
         </NuxtLink>
         {{ product.vendor.title }}
       </li>
@@ -29,6 +26,9 @@
               :data-item-price="product.defaultProductVariant.price"
               :data-item-id="product._id"
               :data-item-url="'/product/' + product.slug.current"
+              :data-item-image="
+                $urlFor(product.defaultProductVariant.images[0]).size(120)
+              "
               type="button"
               class="snipcart-add-item"
             >
