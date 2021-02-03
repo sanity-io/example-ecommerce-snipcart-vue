@@ -17,13 +17,7 @@
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo'
-
-export default {
-  components: {
-    AppLogo,
-  },
-}
+export default {}
 </script>
 
 <style scoped>
